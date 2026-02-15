@@ -1,0 +1,344 @@
+<!-- Hero Section -->
+<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-slate-800">
+    <!-- Background Content -->
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/40 to-slate-900/80 z-10"></div>
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=2013"
+            class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-overlay scale-110"
+            alt="Equipo Background">
+    </div>
+
+    <!-- Content Wrapper -->
+    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20 pb-12">
+        <!-- Badge -->
+        <div class="flex justify-center mb-6">
+            <span
+                class="inline-block px-5 py-2.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-primary font-bold text-xs uppercase tracking-widest">
+                Talento Humano
+            </span>
+        </div>
+
+        <!-- Main Title -->
+        <h1
+            class="text-xl md:text-6xl lg:text-7xl font-heading font-black text-white mb-4 leading-tight uppercase tracking-tight">
+            Nuestro <span class="text-primary">Equipo</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-[13px] md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed font-medium">
+            Conoce a las personas comprometidas con el desarrollo integral y el bienestar de las comunidades en el
+            corazón de La Guajira.
+        </p>
+    </div>
+
+    <!-- Bottom Wave -->
+    <div class="absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
+        <svg class="w-full h-12 md:h-20 text-background" preserveAspectRatio="none" viewBox="0 0 1440 74"
+            fill="currentColor">
+            <path d="M0,74 L1440,74 L1440,37 C1200,0 960,0 720,37 C480,74 240,74 0,37 L0,74 Z"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- Nuestro Equipo Section -->
+<section class="py-12 md:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- Section Header -->
+        <div class="max-w-4xl mx-auto text-center mb-16 md:mb-24">
+            <span
+                class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-[10px] uppercase tracking-widest mb-6">Nuestro
+                Talento</span>
+            <h2
+                class="text-lg md:text-5xl font-heading font-black text-gray-900 mb-6 leading-tight tracking-tight uppercase">
+                Nuestro <span class="text-primary">Equipo</span>
+            </h2>
+            <div class="w-20 h-1.5 bg-primary mx-auto mb-8 rounded-full"></div>
+            <p class="text-[13px] md:text-lg text-gray-600 leading-relaxed font-medium max-w-4xl mx-auto italic">
+                "La Fundación Wopu Süpula Atüja (FWSA) está conformada por un equipo comprometido con el desarrollo
+                social, la educación, el bienestar comunitario y la transformación de realidades en La Guajira. Nuestro
+                trabajo se basa en la colaboración, la responsabilidad social y el compromiso con las comunidades."
+            </p>
+        </div>
+
+        <!-- Team Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+
+            <!-- Miembro 1: Yisleine Karina Torres Turizo -->
+            <div class="group perspective-1000" (click)="toggleFlip(1, $event)">
+                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700"
+                    [class.rotate-y-180]="activeMemberId === 1">
+                    <!-- Front -->
+                    <div
+                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
+                            alt="Yisleine Torres" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <!-- Back -->
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
+                        <span class="text-primary font-black text-[10px] uppercase tracking-widest mb-4">Función
+                            Principal</span>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase tracking-tight">Representante Legal</h4>
+                        <div class="w-10 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-300 text-xs leading-relaxed font-medium italic">
+                            "Representa legalmente a la Fundación, vela por el cumplimiento de los estatutos y asegura
+                            el correcto funcionamiento institucional."
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight mb-0.5">Yisleine Karina
+                        Torres
+                        Turizo</h3>
+                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Representante Legal</p>
+                </div>
+            </div>
+
+            <!-- Miembro 2: Rodolfo Torres castillo -->
+            <div class="group perspective-1000" (click)="toggleFlip(2, $event)">
+                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700"
+                    [class.rotate-y-180]="activeMemberId === 2">
+                    <!-- Front -->
+                    <div
+                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800"
+                            alt="Rodolfo Torres" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <!-- Back -->
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
+                        <span class="text-primary font-black text-[10px] uppercase tracking-widest mb-4">Función
+                            Principal</span>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase tracking-tight">Presidente</h4>
+                        <div class="w-10 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-300 text-xs leading-relaxed font-medium italic">
+                            "Lidera la dirección estratégica de la Fundación y coordina el desarrollo de planes,
+                            programas y proyectos."
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-1">Rodolfo Torres castillo
+                    </h3>
+                    <p class="text-primary font-bold text-[10px] uppercase tracking-widest">Presidente</p>
+                </div>
+            </div>
+
+            <!-- Miembro 3: Yaniris Duarte Bula -->
+            <div class="group perspective-1000" (click)="toggleFlip(3, $event)">
+                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700"
+                    [class.rotate-y-180]="activeMemberId === 3">
+                    <!-- Front -->
+                    <div
+                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800"
+                            alt="Yaniris Duarte" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <!-- Back -->
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
+                        <span class="text-primary font-black text-[10px] uppercase tracking-widest mb-4">Función
+                            Principal</span>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase tracking-tight">Vicepresidente</h4>
+                        <div class="w-10 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-300 text-xs leading-relaxed font-medium italic">
+                            "Apoya al presidente y lo reemplaza en caso de ausencia, fortaleciendo la gestión y
+                            seguimiento de las actividades."
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight mb-0.5">Yaniris Duarte Bula
+                    </h3>
+                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Vicepresidente</p>
+                </div>
+            </div>
+
+            <!-- Miembro 4: Yuranis bula Espinosa -->
+            <div class="group perspective-1000" (click)="toggleFlip(4, $event)">
+                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700"
+                    [class.rotate-y-180]="activeMemberId === 4">
+                    <!-- Front -->
+                    <div
+                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=800"
+                            alt="Yuranis Bula" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <!-- Back -->
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
+                        <span class="text-primary font-black text-[10px] uppercase tracking-widest mb-4">Función
+                            Principal</span>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase tracking-tight">Secretaria</h4>
+                        <div class="w-10 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-300 text-xs leading-relaxed font-medium italic">
+                            "Gestiona la documentación, actas y comunicaciones, apoyando los procesos administrativos de
+                            la Fundación."
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-1">Yuranis bula Espinosa
+                    </h3>
+                    <p class="text-primary font-bold text-[10px] uppercase tracking-widest">Secretaria</p>
+                </div>
+            </div>
+
+            <!-- Miembro 5: Yovert Alberto Duarte Bula -->
+            <div class="group perspective-1000" (click)="toggleFlip(5, $event)">
+                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700"
+                    [class.rotate-y-180]="activeMemberId === 5">
+                    <!-- Front -->
+                    <div
+                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800"
+                            alt="Yovert Duarte" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <!-- Back -->
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
+                        <span class="text-primary font-black text-[10px] uppercase tracking-widest mb-4">Función
+                            Principal</span>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase tracking-tight">Tesorero</h4>
+                        <div class="w-10 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-300 text-xs leading-relaxed font-medium italic">
+                            "Administra los recursos financieros y garantiza su uso transparente y responsable."
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-1">Yovert Alberto Duarte
+                        Bula</h3>
+                    <p class="text-primary font-bold text-[10px] uppercase tracking-widest">Tesorero</p>
+                </div>
+            </div>
+
+            <!-- Miembro 6: Yonelis Beatriz Turizo Choles -->
+            <div class="group perspective-1000" (click)="toggleFlip(6, $event)">
+                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700"
+                    [class.rotate-y-180]="activeMemberId === 6">
+                    <!-- Front -->
+                    <div
+                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800"
+                            alt="Yonelis Turizo" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <!-- Back -->
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
+                        <span class="text-primary font-black text-[10px] uppercase tracking-widest mb-4">Función
+                            Principal</span>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase tracking-tight">Vocal 1</h4>
+                        <div class="w-10 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-300 text-xs leading-relaxed font-medium italic">
+                            "Apoya la toma de decisiones y acompaña la ejecución de programas y proyectos."
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-1">Yonelis Beatriz Turizo
+                        Choles</h3>
+                    <p class="text-primary font-bold text-[10px] uppercase tracking-widest">Vocal</p>
+                </div>
+            </div>
+
+            <!-- Miembro 7: Abigail Yiseth Torres Turizo -->
+            <div class="group perspective-1000" (click)="toggleFlip(7, $event)">
+                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700"
+                    [class.rotate-y-180]="activeMemberId === 7">
+                    <!-- Front -->
+                    <div
+                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=800"
+                            alt="Abigail Torres" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <!-- Back -->
+                    <div
+                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
+                        <span class="text-primary font-black text-[10px] uppercase tracking-widest mb-4">Función
+                            Principal</span>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase tracking-tight">Vocal 2</h4>
+                        <div class="w-10 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-gray-300 text-xs leading-relaxed font-medium italic">
+                            "Contribuye con propuestas y apoyo en las actividades institucionales y comunitarias."
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-1">Abigail Yiseth Torres
+                        Turizo</h3>
+                    <p class="text-primary font-bold text-[10px] uppercase tracking-widest">Vocal</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Team Values / Join Us -->
+<section class="py-12 bg-primary/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="bg-white rounded-[3rem] p-12 md:p-20 shadow-xl border border-primary/10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-32 -mt-32"></div>
+            <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-lg md:text-5xl font-heading font-black text-gray-900 mb-4 leading-tight uppercase">
+                        ¿Quieres ser parte de <span class="text-primary">nuestra labor?</span>
+                    </h2>
+                    <p class="text-gray-600 text-xs md:text-lg mb-6 leading-relaxed font-medium italic">
+                        "Buscamos personas apasionadas, con vocación de servicio y compromiso por la transformación
+                        social de La Guajira."
+                    </p>
+                    <button
+                        class="bg-primary hover:bg-primary-light text-white font-black px-6 py-3.5 md:px-10 md:py-5 rounded-2xl shadow-lg shadow-primary/30 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-widest text-xs md:text-sm w-full md:w-auto">
+                        Únete al Equipo
+                    </button>
+                </div>
+                <!-- Stats Grid - Improved -->
+                <div class="grid grid-cols-2 gap-2 md:gap-4">
+                    <!-- Stat 1 -->
+                    <div
+                        class="bg-primary/5 px-2 py-5 md:p-6 rounded-[2rem] text-center border border-primary/10 transition-transform hover:scale-105 duration-300">
+                        <div class="text-primary text-xl md:text-3xl font-black mb-1 md:mb-2">10+</div>
+                        <div
+                            class="text-gray-500 text-[9px] md:text-[10px] font-black uppercase tracking-tighter md:tracking-widest whitespace-nowrap">
+                            Profesionales</div>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div
+                        class="bg-secondary/5 px-2 py-5 md:p-6 rounded-[2rem] text-center border border-secondary/10 transition-transform hover:scale-105 duration-300">
+                        <div class="text-green-600 text-xl md:text-3xl font-black mb-1 md:mb-2">5+</div>
+                        <div
+                            class="text-gray-500 text-[9px] md:text-[10px] font-black uppercase tracking-tighter md:tracking-widest whitespace-nowrap">
+                            Voluntarios</div>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div
+                        class="bg-orange-50 px-2 py-5 md:p-6 rounded-[2rem] text-center border border-orange-100 transition-transform hover:scale-105 duration-300">
+                        <div class="text-orange-500 text-xl md:text-3xl font-black mb-1 md:mb-2">100%</div>
+                        <div
+                            class="text-gray-500 text-[9px] md:text-[10px] font-black uppercase tracking-tighter md:tracking-widest whitespace-nowrap">
+                            Compromiso</div>
+                    </div>
+                    <!-- Stat 4 -->
+                    <div
+                        class="bg-emerald-50 px-2 py-5 md:p-6 rounded-[2rem] text-center border border-emerald-100 transition-transform hover:scale-105 duration-300">
+                        <div
+                            class="text-emerald-600 text-[12px] md:text-xl font-black mb-1 md:mb-2 uppercase tracking-tighter whitespace-nowrap">
+                            Territorial</div>
+                        <div
+                            class="text-gray-500 text-[9px] md:text-[10px] font-black uppercase tracking-tighter md:tracking-widest">
+                            Enfoque</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,303 @@
+<section
+    class="h-[calc(100vh-9rem)] min-h-[500px] m-4 lg:mx-8 lg:mb-8 lg:mt-6 rounded-3xl relative overflow-hidden flex items-center shadow-md">
+    <!-- Background Image with minimal overlay -->
+    <div class="absolute inset-0">
+        <img src="/assets/images/hero-bg-v2.png" alt="La Guajira Sunset"
+            class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 flex flex-col justify-center h-full">
+        <!-- Increased max-width from xl to 4xl to allow text to stretch -->
+        <div class="max-w-4xl">
+
+            <!-- Top Label -->
+            <div class="flex items-center gap-3 mb-4">
+                <span
+                    class="text-white font-bold tracking-widest text-5xl uppercase shadow-black drop-shadow-sm">FUNDACIÓN
+                    WOPU SÜPULA ATÜJA (FWSA)</span>
+            </div>
+
+            <!-- Main Title -->
+            <h1
+                class="text-2xl font-heading font-black text-white leading-tight mb-4 drop-shadow-lg text-center md:text-left">
+                Formación que impulsa, oportunidades que crecen.
+            </h1>
+
+            <!-- Subtitle -->
+            <p
+                class="text-gray-200 text-base font-medium leading-relaxed mb-6 drop-shadow-md max-w-2xl text-center md:text-left mx-auto md:mx-0">
+                Trabajamos por el desarrollo integral de personas y comunidades en La Guajira, fortaleciendo
+                capacidades, generando oportunidades y promoviendo el bienestar social, económico y ambiental.
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                <button routerLink="/donar"
+                    class="btn bg-primary hover:bg-primary-dark text-white font-bold px-6 py-2.5 rounded-full flex items-center gap-2 transition-transform hover:-translate-y-0.5 shadow-lg shadow-black/20 text-sm">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                    Donar Ahora
+                </button>
+
+                <button routerLink="/quienes-somos"
+                    class="btn bg-transparent border border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors">
+                    Conócenos
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Combined Section: About Us First, then Slider -->
+<section class="py-12 bg-background overflow-hidden relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 relative">
+
+        <!-- 1. CONTENT (First) -->
+        <div class="text-center max-w-6xl mx-auto space-y-6 mb-10">
+            <!-- Badge -->
+            <div class="flex justify-center">
+                <div
+                    class="inline-flex px-4 py-2 rounded-full bg-green-100/50 text-green-700 text-xs font-black tracking-widest uppercase">
+                    Nuestra Esencia
+                </div>
+            </div>
+
+            <!-- Heading -->
+            <h2 class="text-xl md:text-5xl font-heading font-black text-gray-900 leading-[1.1]">
+                Quiénes Somos
+            </h2>
+
+            <!-- Text -->
+            <div class="space-y-6 text-gray-600 leading-relaxed font-body">
+                <p class="text-sm md:text-lg">
+                    Somos una organización social sin ánimo de lucro que nace en La
+                    Guajira con el propósito de contribuir al desarrollo integral de niños, jóvenes, adultos y
+                    comunidades en situación de vulnerabilidad. Trabajamos desde un enfoque educativo, social y
+                    comunitario, orientado al fortalecimiento de capacidades, habilidades y oportunidades que permitan
+                    mejorar la calidad de vida y promover el bienestar individual y colectivo.
+                </p>
+                <p class="text-sm md:text-lg">
+                    Nuestra labor se fundamenta en la formación integral, el acompañamiento psicosocial y la
+                    participación comunitaria, reconociendo el potencial de cada persona y promoviendo procesos que
+                    impulsen la inclusión, la equidad y el desarrollo sostenible del territorio.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- 2. SLIDER (Second) -->
+        <div class="relative mt-10">
+            <div class="relative h-[250px] md:h-[350px] w-full rounded-[2rem] overflow-hidden shadow-2xl group">
+                <!-- Slides -->
+                <div class="absolute inset-0 w-full h-full transition-transform duration-700 ease-in-out"
+                    *ngFor="let slide of slides; let i = index"
+                    [style.transform]="'translateX(' + (i - currentSlide) * 100 + '%)'">
+
+                    <img [src]="slide.image" [alt]="slide.title" class="w-full h-full object-cover">
+
+                    <!-- Slide Content Overlay -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-12 text-center md:text-left">
+                        <h3
+                            class="text-xl md:text-2xl font-heading font-bold text-white mb-1 transform translate-y-0 transition-transform duration-500">
+                            {{ slide.title }}</h3>
+                        <p class="text-white/90 text-sm md:text-base">{{ slide.desc }}</p>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <button (click)="prevSlide()"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all opacity-0 group-hover:opacity-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button (click)="nextSlide()"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all opacity-0 group-hover:opacity-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- Dots -->
+                <div class="absolute bottom-6 right-6 flex gap-2">
+                    <button *ngFor="let slide of slides; let i = index" (click)="setSlide(i)"
+                        class="h-2 rounded-full transition-all duration-300"
+                        [ngClass]="{'w-8 bg-primary': currentSlide === i, 'w-2 bg-white/50 hover:bg-white': currentSlide !== i}">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Impact Section -->
+<section class="py-12 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- Title -->
+        <div class="text-center max-w-5xl mx-auto mb-10 md:mb-16">
+            <h2
+                class="text-lg md:text-5xl font-heading font-black text-gray-900 mb-4 md:mb-6 tracking-tight leading-[1.1]">
+                Lo que hacemos por nuestra <br class="hidden sm:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-600">gente</span>
+            </h2>
+            <p class="text-sm md:text-lg text-gray-600 leading-relaxed max-w-7xl mx-auto font-body px-4">
+                Trabajamos por el desarrollo integral de personas y comunidades, mediante
+                acciones educativas, sociales y comunitarias que fortalecen capacidades, generan oportunidades y
+                promueven el bienestar emocional, el emprendimiento, la empleabilidad y el cuidado del medio ambiente.
+                Nuestro trabajo está dirigido a poblaciones vulnerables de zonas urbanas y rurales, contribuyendo a la
+                construcción de una sociedad más justa, inclusiva y sostenible.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Beneficiaries Section (6 Cards) -->
+<section class="py-12 md:py-20 bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- Header -->
+        <div
+            class="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 md:mb-12 gap-6 text-center md:text-left">
+            <div class="max-w-4xl">
+                <span class="text-green-600 font-bold tracking-widest text-xs uppercase mb-2 block">Nuestros
+                    Beneficiarios</span>
+                <h2 class="text-lg md:text-5xl font-heading font-black text-gray-900 leading-[1.1] mb-3 md:mb-4">
+                    A quién impactamos
+                </h2>
+                <p class="text-sm md:text-lg text-gray-600 leading-relaxed px-4 md:px-0">
+                    Orientamos nuestras acciones al desarrollo social integral y
+                    sostenible de personas y comunidades en situación de vulnerabilidad, con el propósito de contribuir
+                    al mejoramiento de la calidad de vida y a la construcción de entornos más justos, participativos y
+                    dignos.
+                </p>
+            </div>
+            <a routerLink="/impacto"
+                class="hidden md:flex items-center gap-2 text-green-600 font-bold hover:text-green-700 transition-colors whitespace-nowrap">
+                Ver reportes de impacto anual
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- 6 Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Card 1 -->
+            <div class="group relative h-[320px] md:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer">
+                <img src="/assets/images/weaving.png" alt="Niños y Niñas"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 text-center pb-10 md:pb-12">
+                    <span class="w-10 h-1 bg-orange-500 block mx-auto mb-4 rounded-full"></span>
+                    <h3 class="text-lg md:text-2xl font-bold text-white font-heading">Niños y Niñas</h3>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="group relative h-[320px] md:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer">
+                <img src="/assets/images/education.png" alt="Jóvenes"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 text-center pb-10 md:pb-12">
+                    <span class="w-10 h-1 bg-yellow-500 block mx-auto mb-4 rounded-full"></span>
+                    <h3 class="text-lg md:text-2xl font-bold text-white font-heading">Jóvenes</h3>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="group relative h-[320px] md:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer">
+                <img src="/assets/images/about-image.png" alt="Adultos y mayores"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 text-center pb-10 md:pb-12">
+                    <span class="w-10 h-1 bg-green-500 block mx-auto mb-4 rounded-full"></span>
+                    <h3 class="text-lg md:text-2xl font-bold text-white font-heading">Adultos y mayores</h3>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="group relative h-[320px] md:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer">
+                <!-- Reusing images with varied styling or slight filter could be good, for now reusing raw -->
+                <img src="/assets/images/weaving.png" alt="Comunidades vulnerables"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 text-center pb-10 md:pb-12">
+                    <span class="w-10 h-1 bg-purple-500 block mx-auto mb-4 rounded-full"></span>
+                    <h3 class="text-lg md:text-2xl font-bold text-white font-heading">Comunidades vulnerables</h3>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="group relative h-[320px] md:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer">
+                <img src="/assets/images/about-image.png" alt="Poblaciones étnicas"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 sepia hover:sepia-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 text-center pb-10 md:pb-12">
+                    <span class="w-10 h-1 bg-blue-500 block mx-auto mb-4 rounded-full"></span>
+                    <h3 class="text-lg md:text-2xl font-bold text-white font-heading">Poblaciones étnicas</h3>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="group relative h-[320px] md:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer">
+                <img src="/assets/images/education.png" alt="Desplazados"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 bg-blend-multiply">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-8 text-center pb-10 md:pb-12">
+                    <span class="w-10 h-1 bg-red-500 block mx-auto mb-4 rounded-full"></span>
+                    <h3 class="text-lg md:text-2xl font-bold text-white font-heading">Desplazados</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section (Final Call to Action) -->
+<section class="mb-4 md:mb-8 mx-4 lg:mx-8">
+    <div class="max-w-6xl mx-auto">
+        <div
+            class="bg-gradient-to-r from-green-700 to-green-600 rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 lg:p-12 relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+
+            <!-- Content -->
+            <div class="relative z-10 max-w-xl text-center md:text-left">
+                <h2
+                    class="text-xl md:text-4xl lg:text-5xl font-heading font-black text-white mb-3 md:mb-4 leading-tight">
+                    Tú puedes ser <br>
+                    parte del cambio
+                </h2>
+                <p class="text-white/90 text-sm md:text-base font-medium max-w-lg mx-auto md:mx-0">
+                    Tu apoyo, en cualquiera de sus formas, contribuye a transformar vidas y fortalecer comunidades.
+                    Juntos construimos oportunidades que crecen.
+
+                </p>
+            </div>
+
+            <!-- Actions -->
+            <div class="relative z-10 flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
+                <button routerLink="/donar"
+                    class="bg-white text-green-700 font-bold text-sm md:text-lg px-6 md:px-8 py-3 md:py-3.5 rounded-full shadow-lg hover:scale-105 transition-transform duration-300 w-full sm:w-auto whitespace-nowrap">
+                    Donar Ahora
+                </button>
+                <button routerLink="/donar"
+                    class="bg-green-800/30 backdrop-blur-md border-2 border-white/40 text-white font-bold text-sm md:text-lg px-6 md:px-8 py-3 md:py-3.5 rounded-full hover:bg-white/20 transition-all duration-300 w-full sm:w-auto whitespace-nowrap">
+                    Ser Voluntario
+                </button>
+            </div>
+
+            <!-- Decorative abstract circles -->
+            <div
+                class="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-[250px] h-[250px] bg-black/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none">
+            </div>
+
+        </div>
+    </div>
+</section>

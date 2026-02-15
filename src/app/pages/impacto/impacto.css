@@ -1,0 +1,105 @@
+/* Hero Section Custom Styles */
+.font-heading {
+    font-family: 'Outfit', sans-serif;
+}
+
+.text-orange-500 {
+    color: #fc941c;
+}
+
+h1 {
+    letter-spacing: -0.03em;
+}
+
+/* Wavy Bottom Transition */
+svg {
+    display: block;
+}
+
+/* Stats Hover Effect */
+.group:hover .text-orange-500 {
+    text-shadow: 0 0 20px rgba(252, 148, 28, 0.3);
+}
+
+/* Base layout adjustments */
+section {
+    position: relative;
+}
+
+/* Font and leading for the description */
+.leading-relaxed {
+    line-height: 1.7;
+}
+
+/* Custom background for the hero image to ensure legibility */
+.bg-slate-900\/60 {
+    background-color: rgba(15, 23, 42, 0.6);
+}
+
+/* Ensure white background for the wavy sections to match footer/following sections */
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-slate-50 {
+    background-color: #f8fafc;
+}
+
+/* --- Premium Hover Effects --- */
+
+/* Beneficiary Cards Configuration */
+.group {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.group:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(252, 148, 28, 0.15);
+    border-color: rgba(252, 148, 28, 0.4);
+    z-index: 10;
+}
+
+/* Icon Animations inside Cards */
+.group i {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform-style: preserve-3d;
+    will-change: transform;
+    display: inline-block;
+}
+
+.group:hover i {
+    transform: scale(1.15) rotate(8deg) translateZ(0);
+}
+
+/* Quote/Highlight Card Hover */
+.bg-gray-50 {
+    transition: all 0.4s ease;
+}
+
+.bg-gray-50:hover {
+    background-color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+    transform: translateX(4px);
+}
+
+.bg-gray-50 .border-l-8 {
+    transition: border-width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bg-gray-50:hover .border-l-8 {
+    border-left-width: 16px;
+}
+
+/* Subtle Link/Text Hover */
+.text-primary {
+    transition: all 0.3s ease;
+}
+
+h2:hover .text-primary {
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 15px rgba(252, 148, 28, 0.2);
+}

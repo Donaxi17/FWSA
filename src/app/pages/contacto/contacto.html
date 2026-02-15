@@ -1,0 +1,232 @@
+<!-- Hero Section -->
+<section class="relative min-h-[50vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden bg-slate-900">
+    <!-- Background Content -->
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/60 to-slate-900/95 z-10"></div>
+        <img src="/assets/images/hero-bg-v2.png"
+            class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay scale-110 animate-fade-in-slow"
+            alt="Contacto Background">
+    </div>
+
+    <!-- Content Wrapper -->
+    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-24 pb-16">
+        <!-- Badge -->
+        <div class="flex justify-center mb-6">
+            <span
+                class="inline-block px-4 py-1.5 md:px-5 md:py-2 rounded-full bg-primary/10 backdrop-blur-md border border-primary/20 text-primary font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)]">
+                Canales Oficiales
+            </span>
+        </div>
+
+        <!-- Title -->
+        <h1
+            class="text-4xl sm:text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight uppercase tracking-tight drop-shadow-2xl">
+            Contáct<span class="text-primary">anos</span>
+        </h1>
+
+        <p class="text-sm md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium mb-10 text-pretty">
+            Estamos aquí para escucharte y trabajar juntos por el bienestar de La Guajira.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto sm:max-w-none">
+            <a href="#ubicacion" (click)="scrollToUbicacion($event)"
+                class="w-full sm:w-auto group inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm text-white border border-white/20 font-bold text-sm md:text-base px-8 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 justify-center">
+                <div
+                    class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                Ver ubicación
+            </a>
+            <a href="https://wa.me/573005251713" target="_blank"
+                class="w-full sm:w-auto group inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-sm md:text-base px-8 py-4 rounded-xl shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 transition-all duration-300 hover:scale-[1.02] active:scale-95 justify-center border border-transparent">
+                <div
+                    class="w-8 h-8 bg-black/10 rounded-full flex items-center justify-center group-hover:text-white transition-transform">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.821 4.754a8.117 8.117 0 0 1-3.8-.934l-.272-.162-2.83.742.753-2.76-.177-.282a8.108 8.108 0 0 1-1.242-4.317c0-4.483 3.65-8.128 8.129-8.128 2.173 0 4.217.846 5.754 2.382a8.073 8.073 0 0 1 2.38 5.746c0 4.488-3.65 8.135-8.128 8.135m8.124-16.225A11.229 11.229 0 0 0 12.66 0C5.705 0 0 5.703 0 12.659c0 2.223.579 4.392 1.681 6.305L0 24l5.135-1.348a12.61 12.61 0 0 0 7.525 2.006c6.953 0 12.658-5.703 12.658-12.66 0-3.374-1.312-6.545-3.696-8.928" />
+                    </svg>
+                </div>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Bottom Wave -->
+    <div class="absolute bottom-0 left-0 right-0 z-30 pointer-events-none text-gray-50">
+        <svg class="w-full h-8 md:h-20" preserveAspectRatio="none" viewBox="0 0 1440 74" fill="currentColor">
+            <path d="M0,74 L1440,74 L1440,37 C1200,0 960,0 720,37 C480,74 240,74 0,37 L0,74 Z"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- Main Contact Section -->
+<section id="formulario" class="pb-20 bg-gray-50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 -mt-10 relative z-40">
+        <div class="grid lg:grid-cols-[1.8fr_1fr] gap-6 md:gap-8 items-start">
+
+            <!-- Left Column: Contact Form -->
+            <div
+                class="bg-white rounded-3xl p-6 md:p-12 shadow-xl shadow-gray-200/50 border border-gray-100 order-2 lg:order-1">
+                <div class="mb-8 text-center md:text-left">
+                    <h2
+                        class="text-2xl md:text-3xl font-heading font-black text-gray-900 mb-2 uppercase tracking-tight">
+                        Envíanos un mensaje
+                    </h2>
+                    <p class="text-gray-500 text-sm md:text-base">
+                        Completa el formulario y te responderemos lo antes posible.
+                    </p>
+                </div>
+
+                <form (ngSubmit)="onSubmit()" #f="ngForm" class="space-y-5">
+                    <!-- Name and Email Row -->
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="space-y-2 group">
+                            <label
+                                class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Nombre
+                                Completo</label>
+                            <input type="text" name="name" [(ngModel)]="contactForm.name" required
+                                placeholder="Tu nombre"
+                                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
+                        </div>
+                        <div class="space-y-2 group">
+                            <label
+                                class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Correo
+                                Electrónico</label>
+                            <input type="email" name="email" [(ngModel)]="contactForm.email" required email
+                                placeholder="tucorreo@ejemplo.com"
+                                class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
+                        </div>
+                    </div>
+
+                    <!-- Subject -->
+                    <div class="space-y-2 group">
+                        <label
+                            class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Asunto</label>
+                        <input type="text" name="subject" [(ngModel)]="contactForm.subject" required
+                            placeholder="¿En qué podemos ayudarte?"
+                            class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
+                    </div>
+
+                    <!-- Message -->
+                    <div class="space-y-2 group">
+                        <label
+                            class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Mensaje</label>
+                        <textarea name="message" [(ngModel)]="contactForm.message" required rows="5"
+                            placeholder="Escribe aquí los detalles..."
+                            class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium resize-none"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button type="submit" [disabled]="!f.valid"
+                            class="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-bold text-base md:text-lg px-8 py-4 rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>Enviar Mensaje</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column: Contact Cards & Social -->
+            <div class="space-y-5 order-1 lg:order-2">
+                <!-- Info Cards -->
+                <div *ngFor="let info of contactInfo"
+                    class="bg-white p-5 md:p-6 rounded-2xl border border-gray-100 flex items-center gap-5 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 group cursor-pointer"
+                    (click)="info.link === '#ubicacion' ? scrollToUbicacion($event) : null">
+                    <div
+                        class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white text-primary transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                [attr.d]="info.icon" />
+                        </svg>
+                    </div>
+                    <div class="overflow-hidden">
+                        <span
+                            class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1 group-hover:text-primary/70 transition-colors">{{
+                            info.title }}</span>
+                        <a [href]="info.link"
+                            class="text-sm md:text-base font-bold text-gray-900 leading-tight block truncate group-hover:text-primary transition-colors">
+                            {{ info.value }}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Media Box -->
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 shadow-xl relative overflow-hidden text-center md:text-left">
+                    <!-- Decorative Circles -->
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2">
+                    </div>
+
+                    <h3 class="text-white text-xs font-black uppercase tracking-[0.2em] mb-6 relative z-10">
+                        Síguenos en Redes
+                    </h3>
+
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3 relative z-10">
+                        <a *ngFor="let social of socialLinks" [href]="social.url" [title]="social.name"
+                            class="w-11 h-11 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center text-white/80 transition-all duration-300 group hover:scale-110 hover:-translate-y-1 hover:text-white hover:shadow-lg"
+                            [ngClass]="social.color">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path [attr.d]="social.path"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Location Map Section -->
+<section id="ubicacion" class="py-12 md:py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-heading font-black text-gray-900 uppercase tracking-tight">Nuestra
+                Ubicación</h2>
+            <div class="w-20 h-1.5 bg-primary mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div
+            class="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl shadow-gray-200 border-4 border-white transform transition-transform hover:scale-[1.01] duration-500">
+            <!-- Loading placeholder -->
+            <div class="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center z-0">
+                <span class="text-gray-400 font-bold text-sm">Cargando mapa...</span>
+            </div>
+
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.23456789!2d-72.909!3d11.544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e8b6131c7e9b6b7%3A0xed499e3a6a9b6b7!2sCalle%207%20%23%2015-22%2C%20Riohacha%2C%20La%20Guajira!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="absolute inset-0 w-full h-full relative z-10 grayscale-[30%] hover:grayscale-0 transition-all duration-700">
+            </iframe>
+
+            <!-- Floating Card -->
+            <div class="absolute bottom-6 left-6 right-6 md:left-8 md:right-auto md:w-80 z-20">
+                <div
+                    class="bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-xl border-l-4 border-primary transform transition-all hover:translate-x-2">
+                    <h4 class="font-black text-gray-900 uppercase text-sm mb-1">Sede Principal</h4>
+                    <p class="text-xs text-gray-500 font-medium">Calle 7 # 15-22, Riohacha</p>
+                    <a href="https://maps.google.com" target="_blank"
+                        class="text-[10px] font-bold text-primary mt-3 inline-flex items-center gap-1 hover:underline">
+                        Abrir en Google Maps
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+@layer base {
+    body {
+        @apply bg-background text-gray-800 font-body antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-heading font-bold text-gray-900;
+    }
+
+    p {
+        @apply text-base leading-relaxed text-gray-600;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-heading font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-primary {
+        @apply btn bg-primary hover:bg-primary-dark text-white shadow-lg shadow-primary/30 focus:ring-primary;
+    }
+
+    .btn-secondary {
+        @apply btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300 shadow-sm focus:ring-gray-200;
+    }
+
+    .btn-accent-blue {
+        @apply btn bg-accent-blue text-white hover:brightness-110 shadow-lg shadow-accent-blue/30 focus:ring-accent-blue;
+    }
+
+    .btn-accent-green {
+        @apply btn bg-accent-green text-white hover:brightness-110 shadow-lg shadow-accent-green/30 focus:ring-accent-green;
+    }
+
+    .card {
+        @apply bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-white/50 backdrop-blur-sm p-6;
+    }
+}
