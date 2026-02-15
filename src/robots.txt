@@ -1,0 +1,27 @@
+# robots.txt para Fundación Wopu Süpula Atüja (FWSA)
+
+# Permitir a todos los bots acceder a todo el sitio
+User-agent: *
+Allow: /
+
+# Bloquear acceso a archivos y directorios internos
+Disallow: /assets/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Ubicación del sitemap
+Sitemap: https://www.fwsa.org.co/sitemap.xml
+
+# Configuración específica para bots principales
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl-delay para evitar sobrecarga del servidor
+Crawl-delay: 1
