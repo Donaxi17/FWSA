@@ -15,8 +15,10 @@
     transform: rotateY(180deg);
 }
 
-.group:hover .group-hover\:rotate-y-180 {
-    transform: rotateY(180deg);
+@media (min-width: 1024px) {
+    .group:hover .group-hover\:rotate-y-180 {
+        transform: rotateY(180deg);
+    }
 }
 
 /* Custom scrollbar for function text in back of card */

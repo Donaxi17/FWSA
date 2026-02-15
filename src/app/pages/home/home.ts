@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.css',
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  private seoService = inject(SeoService);
   currentSlide = 0;
   slides = [
     {
@@ -37,9 +39,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.setSEO();
+
     if (isPlatformBrowser(this.platformId)) {
       this.startAutoSlide();
     }
+  }
+
+  private setSEO(): void {
+    this.seoService.updateMetaTags({
+      title: 'Inicio',
+      description: 'Fundación Wopu Süpula Atüja (FWSA) - Organización sin ánimo de lucro dedicada al desarrollo integral de comunidades vulnerables en La Guajira mediante educación, emprendimiento y sostenibilidad.',
+      keywords: 'FWSA, fundación La Guajira, desarrollo social Colombia, educación vulnerable, emprendimiento social, Wopu Süpula Atüja',
+      ogUrl: 'https://www.fwsa.org.co/',
+      ogImage: 'https://www.fwsa.org.co/assets/images/home-og.png'
+    });
+
+    // Agregar Schema de Organización
+    this.seoService.generateOrganizationSchema();
   }
 
   ngOnDestroy() {
