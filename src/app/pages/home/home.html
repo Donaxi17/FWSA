@@ -7,23 +7,29 @@
         <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent"></div>
     </div>
 
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 flex flex-col justify-center h-full">
+    <div class="relative z-10 w-full max-w-7xl px-6 sm:px-12 lg:px-16 flex flex-col justify-center h-full">
         <!-- Contenedor centrado en móvil, izquierda en desktop -->
-        <div class="max-w-4xl text-center md:text-left mx-auto md:mx-0">
+        <div class="max-w-5xl text-center md:text-left mx-auto md:mx-0">
 
-            <!-- Top Label - Reducido en móvil -->
-            <!-- Top Label - Optimizado para móvil -->
+            <!-- Top Label -->
             <div
-                class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-2 md:gap-3 mb-4 md:mb-6">
+                class="flex flex-col md:flex-row items-center justify-center md:items-start md:justify-start gap-2 md:gap-3 mb-4 md:mb-6">
+                <!-- Mobile Label (Pill style) -->
                 <span
-                    class="text-white font-bold tracking-normal md:tracking-widest text-[10px] sm:text-sm md:text-2xl lg:text-3xl uppercase shadow-black drop-shadow-md bg-black/20 md:bg-transparent px-3 py-1 rounded-full md:px-0 md:py-0 backdrop-blur-sm md:backdrop-blur-none border border-white/20 md:border-none inline-block whitespace-nowrap">
+                    class="md:hidden text-white font-bold tracking-normal text-[10px] sm:text-sm uppercase shadow-black drop-shadow-md bg-black/20 px-3 py-1 rounded-full backdrop-blur-sm border border-white/20 inline-block whitespace-nowrap">
                     Fundación Wopu Süpula Atüja
+                </span>
+
+                <!-- Desktop Label (Original big style) -->
+                <span
+                    class="hidden md:block text-white font-bold tracking-widest text-3xl lg:text-5xl uppercase shadow-black drop-shadow-sm">
+                    FUNDACIÓN WOPU SÜPULA ATÜJA (FWSA)
                 </span>
             </div>
 
-            <!-- Main Title - Tamaño proporcional y mejor lectura -->
+            <!-- Main Title -->
             <h1
-                class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white leading-[1.1] md:leading-tight mb-4 md:mb-6 drop-shadow-xl max-w-2xl mx-auto md:mx-0">
+                class="text-2xl sm:text-4xl md:text-2xl font-heading font-black text-white leading-[1.1] md:leading-tight mb-4 md:mb-4 drop-shadow-xl max-w-2xl mx-auto md:mx-0 text-center md:text-left">
                 Formación que impulsa, <br class="hidden sm:block"> oportunidades que crecen.
             </h1>
 
