@@ -8,34 +8,37 @@
     </div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 flex flex-col justify-center h-full">
-        <!-- Increased max-width from xl to 4xl to allow text to stretch -->
-        <div class="max-w-4xl">
+        <!-- Contenedor centrado en móvil, izquierda en desktop -->
+        <div class="max-w-4xl text-center md:text-left mx-auto md:mx-0">
 
-            <!-- Top Label -->
-            <div class="flex items-center gap-3 mb-4">
+            <!-- Top Label - Reducido en móvil -->
+            <!-- Top Label - Optimizado para móvil -->
+            <div
+                class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-2 md:gap-3 mb-4 md:mb-6">
                 <span
-                    class="text-white font-bold tracking-widest text-5xl uppercase shadow-black drop-shadow-sm">FUNDACIÓN
-                    WOPU SÜPULA ATÜJA (FWSA)</span>
+                    class="text-white font-bold tracking-normal md:tracking-widest text-[10px] sm:text-sm md:text-2xl lg:text-3xl uppercase shadow-black drop-shadow-md bg-black/20 md:bg-transparent px-3 py-1 rounded-full md:px-0 md:py-0 backdrop-blur-sm md:backdrop-blur-none border border-white/20 md:border-none inline-block whitespace-nowrap">
+                    Fundación Wopu Süpula Atüja
+                </span>
             </div>
 
-            <!-- Main Title -->
+            <!-- Main Title - Tamaño proporcional y mejor lectura -->
             <h1
-                class="text-2xl font-heading font-black text-white leading-tight mb-4 drop-shadow-lg text-center md:text-left">
-                Formación que impulsa, oportunidades que crecen.
+                class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white leading-[1.1] md:leading-tight mb-4 md:mb-6 drop-shadow-xl max-w-2xl mx-auto md:mx-0">
+                Formación que impulsa, <br class="hidden sm:block"> oportunidades que crecen.
             </h1>
 
-            <!-- Subtitle -->
+            <!-- Subtitle - Mejor legibilidad en móvil -->
             <p
-                class="text-gray-200 text-base font-medium leading-relaxed mb-6 drop-shadow-md max-w-2xl text-center md:text-left mx-auto md:mx-0">
+                class="text-gray-100 text-sm sm:text-base md:text-lg font-medium leading-relaxed mb-6 md:mb-6 drop-shadow-md max-w-2xl mx-auto md:mx-0">
                 Trabajamos por el desarrollo integral de personas y comunidades en La Guajira, fortaleciendo
                 capacidades, generando oportunidades y promoviendo el bienestar social, económico y ambiental.
             </p>
 
-            <!-- Buttons -->
-            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+            <!-- Buttons - Centrados en móvil -->
+            <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start items-stretch sm:items-center">
                 <button routerLink="/donar"
-                    class="btn bg-primary hover:bg-primary-dark text-white font-bold px-6 py-2.5 rounded-full flex items-center gap-2 transition-transform hover:-translate-y-0.5 shadow-lg shadow-black/20 text-sm">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    class="btn bg-primary hover:bg-primary-dark text-white font-bold px-8 py-3.5 md:py-3 rounded-full flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-xl shadow-lg shadow-black/30 text-sm md:text-base">
+                    <svg class="w-5 h-5 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                     </svg>
@@ -43,7 +46,7 @@
                 </button>
 
                 <button routerLink="/quienes-somos"
-                    class="btn bg-transparent border border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors">
+                    class="btn bg-white/10 backdrop-blur-sm border-2 border-white/80 text-white font-bold px-8 py-3.5 md:py-3 rounded-full hover:bg-white hover:text-gray-900 transition-all">
                     Conócenos
                 </button>
             </div>
@@ -84,6 +87,18 @@
                     participación comunitaria, reconociendo el potencial de cada persona y promoviendo procesos que
                     impulsen la inclusión, la equidad y el desarrollo sostenible del territorio.
                 </p>
+            </div>
+
+            <!-- CTA Button - Optimizado para móvil -->
+            <div class="flex justify-center mt-8">
+                <button routerLink="/quienes-somos"
+                    class="bg-primary hover:bg-primary-dark text-white font-bold px-6 py-3 md:px-10 md:py-4 rounded-full inline-flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 hover:shadow-xl shadow-lg text-sm md:text-base w-full max-w-xs md:w-auto">
+                    Conoce Nuestra Labor
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </button>
             </div>
 
         </div>
