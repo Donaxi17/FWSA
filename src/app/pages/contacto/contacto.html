@@ -80,57 +80,79 @@
                     </p>
                 </div>
 
-                <form (ngSubmit)="onSubmit()" #f="ngForm" class="space-y-3">
-                    <!-- Name and Email Row -->
-                    <div class="grid md:grid-cols-2 gap-4">
+                <div *ngIf="!isSubmitted; else success">
+                    <form (ngSubmit)="onSubmit()" #f="ngForm" class="space-y-3">
+                        <!-- Name and Email Row -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="space-y-1 group">
+                                <label
+                                    class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Nombre
+                                    Completo</label>
+                                <input type="text" name="name" [(ngModel)]="contactForm.name" required
+                                    placeholder="Tu nombre"
+                                    class="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
+                            </div>
+                            <div class="space-y-1 group">
+                                <label
+                                    class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Correo
+                                    Electrónico</label>
+                                <input type="email" name="email" [(ngModel)]="contactForm.email" required email
+                                    placeholder="tucorreo@ejemplo.com"
+                                    class="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
+                            </div>
+                        </div>
+
+                        <!-- Subject -->
                         <div class="space-y-1 group">
                             <label
-                                class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Nombre
-                                Completo</label>
-                            <input type="text" name="name" [(ngModel)]="contactForm.name" required
-                                placeholder="Tu nombre"
+                                class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Asunto</label>
+                            <input type="text" name="subject" [(ngModel)]="contactForm.subject" required
+                                placeholder="¿En qué podemos ayudarte?"
                                 class="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
                         </div>
+
+                        <!-- Message -->
                         <div class="space-y-1 group">
                             <label
-                                class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Correo
-                                Electrónico</label>
-                            <input type="email" name="email" [(ngModel)]="contactForm.email" required email
-                                placeholder="tucorreo@ejemplo.com"
-                                class="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
+                                class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Mensaje</label>
+                            <textarea name="message" [(ngModel)]="contactForm.message" required rows="3"
+                                placeholder="Escribe aquí los detalles..."
+                                class="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium resize-none"></textarea>
                         </div>
-                    </div>
 
-                    <!-- Subject -->
-                    <div class="space-y-1 group">
-                        <label
-                            class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Asunto</label>
-                        <input type="text" name="subject" [(ngModel)]="contactForm.subject" required
-                            placeholder="¿En qué podemos ayudarte?"
-                            class="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium">
-                    </div>
+                        <!-- Submit Button -->
+                        <div class="pt-2">
+                            <button type="submit" [disabled]="!f.valid || isLoading"
+                                class="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-bold text-sm md:text-base px-8 py-3 rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                                <span *ngIf="!isLoading">Enviar Mensaje</span>
+                                <span *ngIf="isLoading" class="flex items-center gap-2">
+                                    <i class="fas fa-circle-notch animate-spin"></i>
+                                    Enviando...
+                                </span>
+                                <svg *ngIf="!isLoading" class="w-5 h-5 transition-transform group-hover:translate-x-1"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
-                    <!-- Message -->
-                    <div class="space-y-1 group">
-                        <label
-                            class="text-[10px] font-bold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-primary transition-colors">Mensaje</label>
-                        <textarea name="message" [(ngModel)]="contactForm.message" required rows="3"
-                            placeholder="Escribe aquí los detalles..."
-                            class="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-gray-400 text-gray-900 font-medium resize-none"></textarea>
+                <ng-template #success>
+                    <div class="flex flex-col items-center justify-center py-10 text-center animate-fadeIn">
+                        <div
+                            class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-3xl mb-6 shadow-inner">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-gray-900 mb-4 uppercase tracking-tight">¡Mensaje Recibido!
+                        </h3>
+                        <p class="text-gray-500 font-medium max-w-sm leading-relaxed italic">
+                            Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos lo más pronto
+                            posible.
+                        </p>
                     </div>
-
-                    <!-- Submit Button -->
-                    <div class="pt-2">
-                        <button type="submit" [disabled]="!f.valid"
-                            class="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-bold text-sm md:text-base px-8 py-3 rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                            <span>Enviar Mensaje</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
+                </ng-template>
             </div>
 
             <!-- Right Column: Contact Cards & Social -->
