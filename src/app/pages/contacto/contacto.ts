@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { VacanciesService } from '../../services/vacancies.service';
 
 @Component({
     selector: 'app-contacto',
@@ -10,6 +11,9 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./contacto.css']
 })
 export class ContactoComponent {
+    private vacanciesService = inject(VacanciesService);
+    private cdr = inject(ChangeDetectorRef);
+
     contactForm = {
         name: '',
         email: '',
@@ -17,6 +21,9 @@ export class ContactoComponent {
         subject: '',
         message: ''
     };
+
+    isLoading = false;
+    isSubmitted = false;
 
     contactInfo = [
         {
@@ -70,10 +77,49 @@ export class ContactoComponent {
     ];
 
     onSubmit() {
-        console.log('Form submitted:', this.contactForm);
-        // Aquí iría la lógica para enviar el formulario
-        alert('Gracias por contactarnos. Te responderemos pronto.');
-        this.resetForm();
+        if (this.isLoading) return;
+
+        this.isLoading = true;
+        this.cdr.detectChanges();
+
+        const messageData = {
+            ...this.contactForm,
+            isContact: true // Flag para que el backend sepa que es contacto
+        };
+
+        // 1. Guardar en Firestore para respaldo
+        this.vacanciesService.addContactMessage(messageData)
+            .then(async () => {
+                console.log('Mensaje guardado en Firestore');
+
+                // 2. Enviar notificación por Email
+                try {
+                    await fetch('/api/send-email', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(messageData)
+                    });
+                    console.log('Notificación de contacto enviada');
+                } catch (mailErr) {
+                    console.warn('Fallo el envío del email, pero el mensaje se guardó en BD');
+                }
+
+                this.isLoading = false;
+                this.isSubmitted = true;
+                this.resetForm();
+                this.cdr.detectChanges();
+
+                setTimeout(() => {
+                    this.isSubmitted = false;
+                    this.cdr.detectChanges();
+                }, 5000);
+            })
+            .catch(err => {
+                console.error('Error al guardar mensaje:', err);
+                this.isLoading = false;
+                this.cdr.detectChanges();
+                alert('Hubo un error al enviar tu mensaje. Por favor intenta de nuevo.');
+            });
     }
 
     scrollToUbicacion(event: Event) {

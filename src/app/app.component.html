@@ -1,9 +1,9 @@
-<div class="min-h-screen flex flex-col font-body bg-background pt-20">
-  <app-header></app-header>
+<div class="min-h-screen flex flex-col font-body bg-background" [class.pt-20]="!isAdminRoute">
+  <app-header *ngIf="!isAdminRoute"></app-header>
 
   <main class="flex-grow">
     <router-outlet></router-outlet>
   </main>
 
-  <app-footer></app-footer>
+  <app-footer *ngIf="!isAdminRoute"></app-footer>
 </div>

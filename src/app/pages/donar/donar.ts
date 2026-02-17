@@ -29,8 +29,8 @@ import { Component } from '@angular/core';
             </h1>
 
             <!-- Subtitle -->
-            <p class="text-[13px] md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed font-medium">
-                Cada donación es una semilla de esperanza que nos ayuda a llevar educación, salud y oportunidades a las familias de La Guajira.
+            <p class="text-[13px] md:text-xl text-white/90 max-w-5xl mx-auto leading-relaxed font-medium pb-12">
+               Tu apoyo hace posible que más personas accedan a oportunidades de formación, emprendimiento, empleabilidad y bienestar emocional. Cada aporte contribuye al desarrollo integral de comunidades vulnerables y al fortalecimiento de procesos educativos y sociales en La Guajira.
             </p>
         </div>
 

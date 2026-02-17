@@ -1,0 +1,11 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center" *ngIf="!(authReady$ | async)">
+    <div class="flex flex-col items-center">
+        <div class="w-12 h-12 border-4 border-orange-100 border-t-orange-500 rounded-full animate-spin mb-4"></div>
+        <p class="text-gray-400 font-medium animate-pulse">Verificando sesión...</p>
+    </div>
+</div>
+
+<div class="min-h-screen bg-gray-50" *ngIf="(authReady$ | async)">
+    <app-admin-login *ngIf="!(isLoggedIn$ | async)" (loginSuccess)="onLoginSuccess()"></app-admin-login>
+    <app-admin-panel *ngIf="(isLoggedIn$ | async)" (logout)="onLogout()"></app-admin-panel>
+</div>
