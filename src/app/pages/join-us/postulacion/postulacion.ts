@@ -10,151 +10,139 @@ import { take } from 'rxjs/operators';
     standalone: true,
     imports: [CommonModule, FormsModule, RouterModule],
     template: `
-    <section class="min-h-screen bg-slate-50 py-12 md:py-20 px-4">
-        <div class="max-w-4xl mx-auto">
+    <section class="min-h-screen bg-background py-6 md:py-10 px-4 flex items-center justify-center">
+        <div class="max-w-5xl w-full mx-auto">
             <!-- Back Link -->
-            <a routerLink="/unete" class="inline-flex items-center gap-2 text-gray-500 hover:text-orange-500 font-bold text-[10px] md:text-xs uppercase tracking-widest mb-8 md:mb-10 transition-colors group">
+            <a routerLink="/unete" class="inline-flex items-center gap-2 text-gray-400 hover:text-orange-500 font-black text-[10px] md:text-xs uppercase tracking-[0.2em] mb-4 transition-colors group">
                 <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
-                Volver a Vacantes
+                Volver
             </a>
-
-            <!-- Loading State -->
-            <div *ngIf="isLoading" class="flex flex-col items-center justify-center py-20 animate-fadeIn">
-                <div class="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-6"></div>
-                <p class="text-gray-500 font-bold uppercase tracking-widest text-[10px]">Cargando detalles de la vacante...</p>
-            </div>
-
-            <!-- Error / Not Found State -->
-            <div *ngIf="!isLoading && !vacancy" class="bg-white rounded-[2rem] p-12 text-center border-2 border-dashed border-slate-200 shadow-xl shadow-slate-200/50">
-                <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-exclamation-triangle text-3xl text-slate-300"></i>
-                </div>
-                <h2 class="text-2xl font-black text-gray-900 mb-4 uppercase text-center">Vacante no encontrada</h2>
-                <p class="text-gray-500 mb-8 font-medium text-center">Lo sentimos, la oferta laboral que buscas ya no está disponible o el enlace es incorrecto.</p>
-                <div class="flex justify-center">
-                    <button routerLink="/unete" class="bg-gray-900 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-500 transition-all">
-                        Ver otras vacantes
-                    </button>
-                </div>
-            </div>
-
-            <div *ngIf="!isLoading && vacancy" class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-2xl shadow-slate-200/50 border border-gray-100 overflow-hidden animate-fadeIn">
-                <div class="grid grid-cols-1 lg:grid-cols-5">
-                    <!-- Sidebar Info -->
-                    <div class="lg:col-span-2 bg-gray-900 p-8 md:p-12 text-white">
-                        <div class="mb-8 lg:mb-12">
-                            <span class="inline-block px-3 py-1 bg-orange-500 text-white text-[9px] font-black uppercase tracking-widest rounded-lg mb-6 shadow-lg shadow-orange-500/20">
-                                Estás aplicando a:
-                            </span>
-                            <h1 class="text-3xl md:text-4xl font-black leading-tight mb-6">{{ vacancy.title }}</h1>
-                            <div class="w-12 h-1 bg-orange-500/30 rounded-full"></div>
-                        </div>
+ 
+            <!-- Card Container -->
+            <div *ngIf="!isLoading && vacancy" class="bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-gray-100 overflow-hidden animate-fadeIn">
+                <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
+                    
+                    <!-- Sidebar Info (More Compact) -->
+                    <div class="lg:col-span-4 bg-slate-900 p-6 md:p-10 text-white relative overflow-hidden flex flex-col justify-between">
+                        <div class="absolute -top-24 -left-24 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
                         
-                        <div class="space-y-6 md:space-y-8">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                                    <i class="fas fa-map-marker-alt text-orange-400"></i>
-                                </div>
-                                <div>
-                                    <p class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-1">Ubicación</p>
-                                    <p class="text-sm font-bold">{{ vacancy.location }}</p>
-                                </div>
+                        <div class="relative z-10">
+                            <div class="mb-8">
+                                <span class="inline-flex items-center gap-2 px-2.5 py-1 bg-orange-500/20 text-orange-400 text-[9px] font-black uppercase tracking-[0.2em] rounded-md mb-4 border border-orange-500/20">
+                                    Aplicando a:
+                                </span>
+                                <h1 class="text-2xl md:text-4xl font-black leading-tight mb-4 text-white tracking-tight">
+                                    {{ vacancy.title }}
+                                </h1>
+                                <div class="w-12 h-1 bg-orange-500 rounded-full"></div>
                             </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                                    <i class="fas fa-clock text-orange-400"></i>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4 group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                                        <i class="fas fa-map-marker-alt text-orange-400 text-base"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black uppercase tracking-widest text-white/30">Ubicación</p>
+                                        <p class="text-sm font-bold text-white">{{ vacancy.location }}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="text-[9px] font-black uppercase tracking-widest text-white/40 mb-1">Tipo</p>
-                                    <p class="text-sm font-bold">{{ vacancy.type }}</p>
+                                <div class="flex items-center gap-4 group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                                        <i class="fas fa-clock text-orange-400 text-base"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black uppercase tracking-widest text-white/30">Tipo</p>
+                                        <p class="text-sm font-bold text-white">{{ vacancy.type }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mt-12 lg:mt-24 p-6 bg-white/5 rounded-3xl border border-white/10 hidden lg:block">
-                            <p class="text-[11px] text-gray-400 italic leading-relaxed">
-                                \"En FWSA valoramos tu talento. Este proceso es el primer paso para juntos transformar vidas en nuestras comunidades.\"
+                        <div class="mt-8 p-4 bg-white/5 rounded-2xl border border-white/5 hidden lg:block">
+                            <p class="text-[10px] text-gray-400 italic leading-relaxed font-medium">
+                                "Tu talento puede transformar vidas."
                             </p>
                         </div>
                     </div>
-
-                    <!-- Form Area -->
-                    <div class="lg:col-span-3 p-8 md:p-12 lg:p-16 bg-white">
+ 
+                    <!-- Form Area (More Compact) -->
+                    <div class="lg:col-span-8 p-6 md:p-10 bg-white">
                         <div *ngIf="!submitted; else successMessage">
-                            <div class="mb-10">
-                                <h2 class="text-2xl font-black text-gray-900 mb-2 uppercase tracking-tight">Formulario de Aplicación</h2>
-                                <p class="text-gray-400 text-sm font-medium italic">Por favor completa tus datos con cuidado.</p>
+                            <div class="mb-6">
+                                <h2 class="text-xl font-black text-gray-900 mb-1 uppercase tracking-tight">Formulario</h2>
+                                <p class="text-gray-400 text-[11px] font-medium italic">Completa tus datos con cuidado.</p>
                             </div>
                             
-                            <form #applyForm=\"ngForm\" (ngSubmit)=\"onSubmit(applyForm)\" class="space-y-6 md:space-y-8">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                                    <div class="space-y-2">
-                                        <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">Nombre Completo</label>
+                            <form #applyForm="ngForm" (ngSubmit)="onSubmit(applyForm)" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1.5">
+                                        <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Nombre</label>
                                         <input type="text" name="name" ngModel required
-                                            class="w-full px-6 py-4 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-900 placeholder:text-gray-300"
+                                            class="w-full px-4 py-3 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-xl outline-none transition-all font-bold text-sm text-gray-900"
                                             placeholder="Ej: Juan Pérez">
                                     </div>
-                                    <div class="space-y-2">
-                                        <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">Correo Electrónico</label>
+                                    <div class="space-y-1.5">
+                                        <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Correo</label>
                                         <input type="email" name="email" ngModel required email
-                                            class="w-full px-6 py-4 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-900 placeholder:text-gray-300"
+                                            class="w-full px-4 py-3 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-xl outline-none transition-all font-bold text-sm text-gray-900"
                                             placeholder="tu@ejemplo.com">
                                     </div>
                                 </div>
-
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                                    <div class="space-y-2">
-                                        <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">Teléfono / WhatsApp</label>
+ 
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1.5">
+                                        <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Teléfono</label>
                                         <input type="tel" name="phone" ngModel required
-                                            class="w-full px-6 py-4 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-900 placeholder:text-gray-300"
+                                            class="w-full px-4 py-3 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-xl outline-none transition-all font-bold text-sm text-gray-900"
                                             placeholder="+57 300 000 0000">
                                     </div>
-                                    <div class="space-y-2">
-                                        <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">Años de Experiencia</label>
+                                    <div class="space-y-1.5">
+                                        <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Experiencia</label>
                                         <div class="relative">
                                             <select name="experience" ngModel required
-                                                class="w-full px-6 py-4 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-900 appearance-none bg-no-repeat bg-[right_1.5rem_center]">
+                                                class="w-full px-4 py-3 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-xl outline-none transition-all font-bold text-sm text-gray-900 appearance-none">
                                                 <option value="">Seleccionar...</option>
                                                 <option value="Sin experiencia">Sin experiencia</option>
                                                 <option value="1-2 años">1-2 años</option>
                                                 <option value="3-5 años">3-5 años</option>
                                                 <option value="Más de 5 años">Más de 5 años</option>
                                             </select>
-                                            <i class="fas fa-chevron-down absolute right-6 top-1/2 -translate-y-1/2 text-gray-300 pointer-events-none text-xs"></i>
+                                            <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 pointer-events-none text-[10px]"></i>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="space-y-2">
-                                    <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest px-1">Tu Motivación</label>
-                                    <textarea name="motivation" ngModel required rows="4"
-                                        class="w-full px-6 py-4 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-2xl outline-none transition-all font-bold text-gray-900 placeholder:text-gray-300 resize-none"
-                                        placeholder="Cuéntanos por qué quieres unirte a este cargo..."></textarea>
+ 
+                                <div class="space-y-1.5">
+                                    <label class="block text-[9px] font-black text-gray-400 uppercase tracking-widest px-1">Tu Motivación</label>
+                                    <textarea name="motivation" ngModel required rows="3"
+                                        class="w-full px-4 py-3 bg-slate-50 border border-slate-100 focus:border-orange-500 focus:bg-white rounded-xl outline-none transition-all font-bold text-sm text-gray-900 resize-none"
+                                        placeholder="Cuéntanos por qué quieres unirte..."></textarea>
                                 </div>
-
-                                <div class="pt-6">
+ 
+                                <div class="pt-2">
                                     <button type="submit" [disabled]="applyForm.invalid || isSubmitting"
-                                        class="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-slate-100 disabled:text-slate-400 disabled:shadow-none text-white font-black py-5 px-8 rounded-[1.5rem] shadow-2xl shadow-orange-500/40 transition-all flex items-center justify-center gap-4 active:scale-95 group">
-                                        <span class="text-xs uppercase tracking-[0.2em]" *ngIf="!isSubmitting">Enviar Postulación</span>
-                                        <span class="text-xs uppercase tracking-[0.2em]" *ngIf="isSubmitting">Procesando...</span>
-                                        <i *ngIf="!isSubmitting" class="fas fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                                        <i *ngIf="isSubmitting" class="fas fa-circle-notch animate-spin"></i>
+                                        class="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-slate-100 disabled:text-slate-400 text-white font-black py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 active:scale-95 group">
+                                        <span class="text-[10px] uppercase tracking-[0.2em]" *ngIf="!isSubmitting">Enviar Postulación</span>
+                                        <span class="text-[10px] uppercase tracking-[0.2em]" *ngIf="isSubmitting">Procesando...</span>
+                                        <i *ngIf="!isSubmitting" class="fas fa-paper-plane text-xs"></i>
+                                        <i *ngIf="isSubmitting" class="fas fa-circle-notch animate-spin text-xs"></i>
                                     </button>
                                 </div>
                             </form>
                         </div>
-
+ 
                         <ng-template #successMessage>
-                            <div class="flex flex-col items-center justify-center h-full text-center py-12 animate-fadeIn">
-                                <div class="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-4xl mb-8 shadow-inner">
+                            <div class="flex flex-col items-center justify-center h-full text-center py-6 animate-fadeIn">
+                                <div class="w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-2xl mb-4">
                                     <i class="fas fa-check"></i>
                                 </div>
-                                <h2 class="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">¡Enviado con éxito!</h2>
-                                <p class="text-gray-500 font-medium mb-12 max-w-sm leading-relaxed italic">
-                                    Tu postulación para <strong>{{ vacancy.title }}</strong> ha sido recibida. Estaremos en contacto pronto.
+                                <h2 class="text-xl font-black text-gray-900 mb-2 uppercase tracking-tight">¡Enviado!</h2>
+                                <p class="text-xs text-gray-500 font-medium mb-6 max-w-xs leading-relaxed italic">
+                                    Recibimos tu postulación para <strong>{{ vacancy.title }}</strong>.
                                 </p>
                                 <button routerLink="/unete" 
-                                    class="px-12 py-4 bg-gray-900 text-white font-black rounded-2xl text-[10px] uppercase tracking-[0.2em] hover:bg-orange-500 transition-all shadow-xl shadow-gray-900/10">
+                                    class="px-8 py-3 bg-gray-900 text-white font-black rounded-xl text-[9px] uppercase tracking-[0.2em] hover:bg-orange-500 transition-all">
                                     Volver al listado
                                 </button>
                             </div>

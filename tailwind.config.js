@@ -11,7 +11,7 @@ module.exports = {
           light: '#FB923C',   // Orange-400
           dark: '#EA580C',    // Orange-600
         },
-        background: '#F3F4F6', // Light gray background
+        background: '#DDE1E7', // More visible gray background
         accent: {
           blue: '#38BDF8',     // Sky-400
           green: '#22C55E',    // Green-500 (Verde esperanza)

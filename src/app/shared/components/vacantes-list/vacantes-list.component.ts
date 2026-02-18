@@ -8,7 +8,7 @@ import { VacanciesService, Vacancy } from '../../../services/vacancies.service';
     standalone: true,
     imports: [CommonModule],
     template: `
-    <section id="vacantes-section" class="py-24 bg-slate-50 relative overflow-hidden">
+    <section id="vacantes-section" class="py-24 bg-background relative overflow-hidden">
         <!-- Decorative background elements -->
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100/20 rounded-full blur-[120px] -mr-64 -mt-64"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-50/20 rounded-full blur-[120px] -ml-64 -mb-64"></div>
@@ -27,53 +27,72 @@ import { VacanciesService, Vacancy } from '../../../services/vacancies.service';
                 </p>
             </div>
 
-            <div *ngIf="vacantes.length > 0; else noVacancies" class="grid lg:grid-cols-2 gap-10">
+            <div *ngIf="vacantes.length > 0; else noVacancies" class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
                 <div *ngFor="let item of vacantes" 
-                    class="group relative bg-white rounded-[3rem] p-1 shadow-2xl shadow-slate-200/40 hover:shadow-orange-500/10 transition-all duration-500 border border-transparent hover:border-orange-100 overflow-hidden">
+                    class="group relative bg-white rounded-[2rem] md:rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-orange-200 transition-all duration-500 overflow-hidden flex flex-col h-full">
                     
-                    <div class="p-8 md:p-10 flex flex-col h-full bg-white rounded-[2.8rem]">
-                        <div class="flex flex-wrap items-center gap-3 mb-6">
-                            <span class="px-4 py-1.5 bg-gray-900 text-white text-[9px] font-black uppercase tracking-widest rounded-full">
-                                {{ item.type }}
-                            </span>
-                            <span class="px-4 py-1.5 bg-orange-50 text-orange-600 border border-orange-100 text-[9px] font-black uppercase tracking-widest rounded-full flex items-center gap-2">
-                                <i class="fas fa-map-marker-alt"></i> {{ item.location }}
-                            </span>
-                        </div>
+                    <!-- Decorative Gradient Top -->
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"></div>
 
-                        <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-6 group-hover:text-orange-500 transition-colors leading-tight">{{ item.title }}</h3>
+                    <!-- Header -->
+                    <div class="p-6 md:p-8 pb-4 flex flex-wrap justify-between items-start gap-4">
+                        <div class="flex flex-wrap gap-2">
+                            <div class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-600 rounded-lg border border-slate-100 transition-colors group-hover:bg-slate-100">
+                                <i class="fas fa-briefcase text-[10px] text-slate-400"></i>
+                                <span class="text-[10px] font-bold uppercase tracking-wider">{{ item.type }}</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 text-orange-600 rounded-lg border border-orange-100/50">
+                                <i class="fas fa-map-marker-alt text-[10px]"></i>
+                                <span class="text-[10px] font-bold uppercase tracking-wider">{{ item.location }}</span>
+                            </div>
+                        </div>
                         
-                        <p class="text-gray-500 text-[15px] leading-relaxed mb-8 flex-1">
+                        <!-- Dynamic Status -->
+                        <div [ngClass]="item.status === 'Abierta' ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-slate-100 text-slate-400'" 
+                             class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-lg ring-4 ring-white transition-all">
+                            <span class="relative flex h-2 w-2" *ngIf="item.status === 'Abierta'">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                            </span>
+                            {{ item.status === 'Abierta' ? 'Activa' : 'Cerrada' }}
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="px-6 md:px-8 pb-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-3xl font-black text-slate-900 mb-4 group-hover:text-orange-500 transition-colors leading-tight">
+                            {{ item.title }}
+                        </h3>
+                        
+                        <p class="text-slate-500 text-sm md:text-base leading-relaxed mb-8 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
                             {{ item.description }}
                         </p>
                         
-                        <div class="space-y-4 mb-10">
-                            <h4 class="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                        <!-- Requirements -->
+                        <div class="mt-auto pt-6 border-t border-slate-50">
+                            <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                                 <i class="fas fa-check-circle text-orange-500"></i> Lo que buscamos:
                             </h4>
                             <div class="flex flex-wrap gap-2">
                                 <span *ngFor="let req of item.requirements" 
-                                    class="text-[11px] font-bold text-gray-600 bg-gray-50 px-4 py-2 rounded-2xl border border-gray-100 transition-colors group-hover:bg-orange-50/50 group-hover:border-orange-100/50">
+                                    class="text-[11px] font-medium text-slate-600 bg-slate-50/50 px-3 py-1.5 rounded-lg border border-slate-100 transition-all group-hover:bg-orange-100/10 group-hover:border-orange-200/50">
                                     {{ req }}
                                 </span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="pt-8 border-t border-gray-100 flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="relative flex h-2 w-2">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                </span>
-                                <span class="text-[10px] font-black text-green-600 uppercase tracking-widest">Postulación Abierta</span>
-                            </div>
+                    <!-- Footer Action -->
+                    <div class="p-6 md:p-8 pt-4">
+                        <button (click)="apply(item.id!)" [disabled]="item.status !== 'Abierta'"
+                            class="w-full relative group/btn overflow-hidden bg-slate-900 disabled:bg-slate-200 text-white disabled:text-slate-400 py-4 rounded-xl md:rounded-2xl font-black text-xs uppercase tracking-[0.15em] transition-all hover:shadow-xl hover:shadow-orange-500/30 active:scale-[0.98] disabled:active:scale-100 flex items-center justify-center gap-3 border-none disabled:cursor-not-allowed">
+                            <span class="relative z-10">{{ item.status === 'Abierta' ? 'Postularme ahora' : 'No disponible' }}</span>
+                            <i *ngIf="item.status === 'Abierta'" class="fas fa-arrow-right relative z-10 transition-transform group-hover/btn:translate-x-1.5"></i>
+                            <i *ngIf="item.status !== 'Abierta'" class="fas fa-lock text-[10px] opacity-40"></i>
                             
-                            <button (click)="apply(item.id!)" 
-                                class="bg-gray-900 hover:bg-orange-500 text-white px-8 py-3.5 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-gray-900/10 flex items-center gap-3">
-                                <span class="text-xs font-black uppercase tracking-widest">Postularme ahora</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
+                            <!-- Premium Hover Effect (Only for active) -->
+                            <div *ngIf="item.status === 'Abierta'" class="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </button>
                     </div>
                 </div>
             </div>

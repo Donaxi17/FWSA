@@ -24,6 +24,11 @@ export class ContactoComponent {
 
     isLoading = false;
     isSubmitted = false;
+    toast = {
+        show: false,
+        message: '',
+        type: 'success'
+    };
 
     contactInfo = [
         {
@@ -106,6 +111,20 @@ export class ContactoComponent {
 
                 this.isLoading = false;
                 this.isSubmitted = true;
+
+                // Show toast for PC
+                this.showToast('¡Mensaje enviado correctamente!', 'success');
+
+                // Auto-scroll to success message with offset (slightly higher)
+                setTimeout(() => {
+                    const el = document.getElementById('success-message');
+                    if (el) {
+                        const yOffset = -120; // Offset para que quede "más arriba"
+                        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                }, 100);
+
                 this.resetForm();
                 this.cdr.detectChanges();
 
@@ -138,5 +157,14 @@ export class ContactoComponent {
             subject: '',
             message: ''
         };
+    }
+
+    showToast(message: string, type: 'success' | 'error' = 'success') {
+        this.toast = { show: true, message, type };
+        this.cdr.detectChanges();
+        setTimeout(() => {
+            this.toast.show = false;
+            this.cdr.detectChanges();
+        }, 5000);
     }
 }

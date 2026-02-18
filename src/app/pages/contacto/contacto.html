@@ -64,7 +64,7 @@
 </section>
 
 <!-- Main Contact Section -->
-<section id="formulario" class="pt-10 pb-20 bg-slate-100 relative">
+<section id="formulario" class="pt-10 pb-20 bg-background relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-40">
         <div class="grid lg:grid-cols-2 gap-6 md:gap-8">
 
@@ -72,7 +72,8 @@
             <div
                 class="bg-white rounded-3xl p-6 md:p-8 shadow-xl shadow-slate-200 border border-gray-200 order-2 lg:order-1">
                 <div class="mb-6 text-center md:text-left">
-                    <h2 class="text-xl md:text-2xl font-heading font-black text-gray-900 mb-1 uppercase tracking-tight">
+                    <h2 id="success-message"
+                        class="text-xl md:text-2xl font-heading font-black text-gray-900 mb-1 uppercase tracking-tight">
                         Envíanos un mensaje
                     </h2>
                     <p class="text-gray-500 text-xs md:text-sm">
@@ -140,16 +141,16 @@
                 </div>
 
                 <ng-template #success>
-                    <div class="flex flex-col items-center justify-center py-10 text-center animate-fadeIn">
+                    <div class="flex flex-col items-center justify-center py-6 md:py-10 text-center animate-fadeIn">
                         <div
-                            class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-3xl mb-6 shadow-inner">
+                            class="w-16 h-16 md:w-20 md:h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-2xl md:text-3xl mb-4 md:mb-6 shadow-inner">
                             <i class="fas fa-check"></i>
                         </div>
-                        <h3 class="text-2xl font-black text-gray-900 mb-4 uppercase tracking-tight">¡Mensaje Recibido!
+                        <h3 class="text-xl md:text-2xl font-black text-gray-900 mb-2 md:mb-4 uppercase tracking-tight">
+                            ¡Mensaje Recibido!
                         </h3>
-                        <p class="text-gray-500 font-medium max-w-sm leading-relaxed italic">
-                            Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos lo más pronto
-                            posible.
+                        <p class="text-xs md:text-sm text-gray-500 font-medium max-w-sm leading-relaxed italic px-4">
+                            Gracias por contactarnos. Te responderemos lo más pronto posible.
                         </p>
                     </div>
                 </ng-template>
@@ -210,7 +211,7 @@
 </section>
 
 <!-- Location Map Section -->
-<section id="ubicacion" class="py-12 md:py-20 bg-gray-50">
+<section id="ubicacion" class="py-12 md:py-20 bg-background">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10">
             <h2 class="text-2xl md:text-3xl font-heading font-black text-gray-900 uppercase tracking-tight">Nuestra
@@ -254,3 +255,20 @@
         </div>
     </div>
 </section>
+
+<!-- Notification Toast (PC) -->
+<div *ngIf="toast.show" class="fixed top-24 right-6 z-[100] animate-slideInRight hidden md:block">
+    <div
+        class="bg-gray-900 text-white px-6 py-4 rounded-2xl shadow-2xl border border-white/10 flex items-center gap-4 min-w-[320px] backdrop-blur-xl">
+        <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center shrink-0">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="flex-1">
+            <p class="text-[10px] font-black uppercase tracking-[0.2em] text-green-500 mb-0.5">Éxito</p>
+            <p class="text-sm font-bold text-white">{{ toast.message }}</p>
+        </div>
+        <button (click)="toast.show = false" class="text-white/20 hover:text-white transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>
