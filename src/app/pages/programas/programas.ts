@@ -18,6 +18,8 @@ export class ProgramasComponent {
     // Filtering states
     selectedCategory: string = 'Todos';
     selectedStatus: string = 'Todos';
+    tempCategory: string = 'Todos';
+    tempStatus: string = 'Todos';
     showFilterMenu = false;
 
     documentos = [
@@ -53,16 +55,28 @@ export class ProgramasComponent {
     }
 
     toggleFilterMenu() {
+        if (!this.showFilterMenu) {
+            // Opening: sync temps
+            this.tempCategory = this.selectedCategory;
+            this.tempStatus = this.selectedStatus;
+        }
         this.showFilterMenu = !this.showFilterMenu;
     }
 
+    applyFilters() {
+        this.selectedCategory = this.tempCategory;
+        this.selectedStatus = this.tempStatus;
+        this.showFilterMenu = false;
+        this.cdr.detectChanges();
+    }
+
     setCategory(cat: string) {
-        this.selectedCategory = cat;
+        this.tempCategory = cat;
         this.cdr.detectChanges();
     }
 
     setStatus(status: string) {
-        this.selectedStatus = status;
+        this.tempStatus = status;
         this.cdr.detectChanges();
     }
 

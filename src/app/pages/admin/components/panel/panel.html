@@ -36,19 +36,6 @@
                 <span class="font-medium">Programas</span>
             </button>
 
-            <button (click)="switchView('equipo')" [class.bg-orange-50]="currentView === 'equipo'"
-                [class.text-orange-600]="currentView === 'equipo'" [class.shadow-sm]="currentView === 'equipo'"
-                [class.border-orange-100]="currentView === 'equipo'"
-                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-orange-600 transition-all duration-200 group border border-transparent">
-                <svg [class.text-orange-500]="currentView === 'equipo'"
-                    class="w-5 h-5 mr-3 transition-colors group-hover:text-orange-500" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <span class="font-medium">Equipo y Vacantes</span>
-            </button>
-
             <button (click)="switchView('vacantes')" [class.bg-orange-50]="currentView === 'vacantes'"
                 [class.text-orange-600]="currentView === 'vacantes'" [class.shadow-sm]="currentView === 'vacantes'"
                 [class.border-orange-100]="currentView === 'vacantes'"
@@ -62,6 +49,19 @@
                 <span class="font-medium">Vacantes</span>
             </button>
 
+            <button (click)="switchView('equipo')" [class.bg-orange-50]="currentView === 'equipo'"
+                [class.text-orange-600]="currentView === 'equipo'" [class.shadow-sm]="currentView === 'equipo'"
+                [class.border-orange-100]="currentView === 'equipo'"
+                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-orange-600 transition-all duration-200 group border border-transparent">
+                <svg [class.text-orange-500]="currentView === 'equipo'"
+                    class="w-5 h-5 mr-3 transition-colors group-hover:text-orange-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span class="font-medium">Equipo</span>
+            </button>
+
             <button (click)="switchView('usuarios')" [class.bg-orange-50]="currentView === 'usuarios'"
                 [class.text-orange-600]="currentView === 'usuarios'" [class.shadow-sm]="currentView === 'usuarios'"
                 [class.border-orange-100]="currentView === 'usuarios'"
@@ -72,7 +72,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-                <span class="font-medium">Usuarios Admin</span>
+                <span class="font-medium">Usuarios</span>
             </button>
         </nav>
 

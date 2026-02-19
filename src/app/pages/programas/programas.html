@@ -297,7 +297,7 @@
                         <div class="flex flex-wrap gap-2">
                             <button *ngFor="let cat of categories" (click)="setCategory(cat)"
                                 class="px-4 py-2.5 rounded-2xl text-[11px] font-black transition-all border uppercase tracking-tighter"
-                                [ngClass]="selectedCategory === cat ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' : 'bg-white text-gray-600 border-gray-100 hover:bg-gray-50'">
+                                [ngClass]="tempCategory === cat ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' : 'bg-white text-gray-600 border-gray-100 hover:bg-gray-50'">
                                 {{ cat }}
                             </button>
                         </div>
@@ -313,14 +313,14 @@
                         <div class="flex flex-wrap gap-2">
                             <button *ngFor="let st of statuses" (click)="setStatus(st)"
                                 class="px-4 py-2.5 rounded-2xl text-[11px] font-black transition-all border uppercase tracking-tighter"
-                                [ngClass]="selectedStatus === st ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' : 'bg-white text-gray-600 border-gray-100 hover:bg-gray-50'">
+                                [ngClass]="tempStatus === st ? 'bg-orange-500 text-white border-orange-500 shadow-md shadow-orange-500/20' : 'bg-white text-gray-600 border-gray-100 hover:bg-gray-50'">
                                 {{ st }}
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <button (click)="toggleFilterMenu()"
+                <button (click)="applyFilters()"
                     class="w-full mt-10 py-4 bg-gray-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-black transition-all active:scale-95">
                     Aplicar Cambios
                 </button>
@@ -434,7 +434,7 @@
                     </div>
                     <div class="text-left flex-1 min-w-0">
                         <h3
-                            class="text-[11px] md:text-base font-black text-gray-900 leading-snug md:leading-tight line-clamp-2 md:line-clamp-1 pr-2">
+                            class="text-[12px] md:text-base font-black text-gray-900 leading-snug md:leading-tight line-clamp-2 md:line-clamp-1 pr-2">
                             {{ doc.title }}</h3>
                         <div class="flex items-center gap-2 md:gap-3 mt-1 md:mt-1.5">
                             <span
