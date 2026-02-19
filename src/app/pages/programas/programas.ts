@@ -1,12 +1,11 @@
 import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProgramsService, Program } from '../../services/programs.service';
-import { JoinTeamCtaComponent } from '../../shared/components/join-team-cta/join-team-cta.component';
 
 @Component({
     selector: 'app-programas',
     standalone: true,
-    imports: [CommonModule, JoinTeamCtaComponent],
+    imports: [CommonModule],
     templateUrl: './programas.html',
     styleUrls: ['./programas.css']
 })
