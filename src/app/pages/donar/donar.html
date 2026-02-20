@@ -129,24 +129,172 @@
             </div>
         </div>
 
-        <!-- Donation Note & Contact -->
-        <div class="mt-12 md:mt-16 max-w-3xl mx-auto px-4">
-            <div
-                class="relative bg-white/50 backdrop-blur-sm border border-gray-100 p-6 md:p-8 rounded-[2rem] text-center shadow-lg hover:shadow-xl transition-all duration-300 group">
-                <div
-                    class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-hand-holding-heart text-xl"></i>
-                </div>
-                <h3 class="text-sm md:text-lg font-black text-gray-900 uppercase tracking-tight mb-2">¿Quieres donar en
-                    especie?</h3>
-                <p class="text-gray-500 font-medium text-xs md:text-sm leading-relaxed max-w-xl mx-auto mb-6">
-                    Para donaciones materiales, voluntariado o certificados deducibles de renta.
+        <!-- OTRAS FORMAS DE APOYAR -->
+        <div class="mt-20 md:mt-32">
+            <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <span class="text-[9px] font-black text-primary uppercase tracking-[0.3em] mb-2 block">Multiversidad de
+                    Ayuda</span>
+                <h2 class="text-xl md:text-4xl font-heading font-black text-gray-900 mb-4 leading-tight uppercase">
+                    Otras Formas de <span class="text-primary">Apoyar</span>
+                </h2>
+                <p class="text-sm md:text-base text-gray-500 font-medium leading-relaxed">
+                    En la Fundación Wopu Süpula Atüja creemos que todas las personas pueden aportar desde lo que saben,
+                    tienen o hacen.
                 </p>
-                <a routerLink="/contacto"
-                    class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-full text-[10px] md:text-xs font-black text-gray-700 uppercase tracking-widest hover:bg-gray-50 hover:border-primary/30 hover:text-primary transition-all duration-300 shadow-sm hover:shadow-md">
-                    <span>Contáctanos Directamente</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+            </div>
+
+            <!-- Support Methods Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Voluntariado -->
+                <div
+                    class="group bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                        class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-hands-helping text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-3">Voluntariado</h3>
+                    <p class="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+                        Personas que deseen apoyar con su tiempo, conocimientos o habilidades en actividades sociales,
+                        educativas, ambientales o comunitarias.
+                    </p>
+                </div>
+
+                <!-- Donación de Conocimientos -->
+                <div
+                    class="group bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                        class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-lightbulb text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-3">Donación de Conocimientos
+                    </h3>
+                    <p class="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+                        Profesionales, docentes o personas con experiencia que quieran dictar talleres, capacitaciones o
+                        acompañar en procesos formativos.
+                    </p>
+                </div>
+
+                <!-- Donación en Especie -->
+                <div
+                    class="group bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                        class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-box-open text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-3">Donación en Especie</h3>
+                    <p class="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+                        Aportes como materiales educativos, herramientas de trabajo, insumos, equipos, libros, útiles
+                        escolares u otros recursos necesarios.
+                    </p>
+                </div>
+
+                <!-- Alianzas Institucionales -->
+                <div
+                    class="group bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                    <div
+                        class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-handshake text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-3">Alianzas Institucionales
+                    </h3>
+                    <p class="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+                        Empresas, organizaciones o instituciones que deseen generar proyectos conjuntos o apoyar
+                        iniciativas sociales.
+                    </p>
+                </div>
+
+                <!-- Difusión y Apoyo Digital -->
+                <div
+                    class="group bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 lg:col-span-1">
+                    <div
+                        class="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center text-rose-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fas fa-bullhorn text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-gray-900 uppercase tracking-tight mb-3">Difusión y Apoyo Digital
+                    </h3>
+                    <p class="text-xs md:text-sm text-gray-500 leading-relaxed font-medium">
+                        Personas que apoyen compartiendo nuestras actividades, campañas y mensajes en redes sociales
+                        para ampliar nuestro alcance.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Final Contact Section -->
+            <div class="mt-20 md:mt-32 relative">
+                <div class="absolute inset-0 bg-primary/5 rounded-[3rem] -rotate-1"></div>
+                <div class="relative bg-white border border-gray-100 p-8 md:p-16 rounded-[3rem] shadow-xl text-center">
+                    <h2 class="text-2xl md:text-4xl font-heading font-black text-gray-900 mb-6 uppercase">
+                        ¿Cómo <span class="text-primary">Contribuir?</span>
+                    </h2>
+                    <p class="text-sm md:text-base text-gray-600 font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
+                        Si deseas apoyarnos como voluntario, realizar una donación en especie, compartir tus
+                        conocimientos o generar una alianza institucional, escríbenos y cuéntanos cómo te gustaría
+                        contribuir.
+                    </p>
+
+                    <!-- Email Card -->
+                    <div class="max-w-xl mx-auto bg-gray-50 rounded-3xl p-8 mb-12 border border-gray-100">
+                        <div
+                            class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary mx-auto mb-4 shadow-sm">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Escríbenos a:</p>
+                        <a href="mailto:donaciones@fwsa.org"
+                            class="text-xl md:text-2xl font-black text-primary hover:text-primary-light transition-colors">
+                            donaciones&#64;fwsa.org
+                        </a>
+
+                        <div class="mt-8 pt-8 border-t border-gray-200">
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Indica en el
+                                asunto:</p>
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <span
+                                    class="px-4 py-2 bg-primary rounded-full text-[10px] font-bold text-white shadow-md hover:bg-primary-light transition-colors cursor-default">Voluntariado</span>
+                                <span
+                                    class="px-4 py-2 bg-primary rounded-full text-[10px] font-bold text-white shadow-md hover:bg-primary-light transition-colors cursor-default">Donación
+                                    en especie</span>
+                                <span
+                                    class="px-4 py-2 bg-primary rounded-full text-[10px] font-bold text-white shadow-md hover:bg-primary-light transition-colors cursor-default">Donación
+                                    de conocimientos</span>
+                                <span
+                                    class="px-4 py-2 bg-primary rounded-full text-[10px] font-bold text-white shadow-md hover:bg-primary-light transition-colors cursor-default">Alianza
+                                    institucional</span>
+                                <span
+                                    class="px-4 py-2 bg-primary rounded-full text-[10px] font-bold text-white shadow-md hover:bg-primary-light transition-colors cursor-default">Apoyo
+                                    Digital</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="space-y-6">
+                        <p class="text-xs md:text-sm font-black text-gray-900 uppercase tracking-widest">Síguenos y
+                            escríbenos por nuestras redes sociales</p>
+                        <div class="flex justify-center gap-4">
+                            <a href="#"
+                                class="w-12 h-12 rounded-2xl bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary hover:shadow-lg transition-all duration-300">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#"
+                                class="w-12 h-12 rounded-2xl bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary hover:shadow-lg transition-all duration-300">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#"
+                                class="w-12 h-12 rounded-2xl bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary hover:shadow-lg transition-all duration-300">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Final Phrase -->
+                    <div class="mt-16 pt-8 border-t border-gray-100">
+                        <p class="text-lg md:text-2xl font-heading font-black text-gray-900 italic">
+                            "Cada forma de apoyo <span
+                                class="text-primary underline decoration-wavy decoration-primary-light/30">suma y genera
+                                impacto</span>"
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

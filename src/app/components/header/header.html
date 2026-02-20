@@ -1,95 +1,106 @@
-<header class="bg-white/95 backdrop-blur-md border-b border-gray-100 fixed w-full top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-            <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center gap-1 cursor-pointer" routerLink="/">
-                <!-- Icon placeholder matching the golden cone/triangle -->
-                <div class="w-8 h-8 md:w-10 md:h-10 text-primary-light">
-                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
-                        <path d="M12 2L2 22h20L12 2zm0 3.5L18.5 20H5.5L12 5.5z M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                    </svg>
+<header class="fixed w-full top-0 z-50">
+    <!-- White Top Bar Background -->
+    <div class="bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm relative z-[60]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 md:h-24">
+                <!-- Logo -->
+                <a routerLink="/" class="flex items-center cursor-pointer group h-full py-2">
+                    <img src="/fwsa-logo-no-bg.png" alt="FWSA Logo"
+                        class="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 [image-rendering:auto] [backface-visibility:hidden] transform-gpu">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8 lg:space-x-12">
+                    <!-- Inicio -->
+                    <a routerLink="/" routerLinkActive="text-primary font-bold after:scale-x-100"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
+                        Inicio
+                    </a>
+
+                    <a routerLink="/quienes-somos" routerLinkActive="text-primary font-bold after:scale-x-100"
+                        class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
+                        Quiénes Somos
+                    </a>
+
+                    <a routerLink="/equipo" routerLinkActive="text-primary font-bold after:scale-x-100"
+                        class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
+                        Equipo
+                    </a>
+
+                    <a routerLink="/programas" routerLinkActive="text-primary font-bold after:scale-x-100"
+                        class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
+                        Programas
+                    </a>
+
+                    <a routerLink="/impacto" routerLinkActive="text-primary font-bold after:scale-x-100"
+                        class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
+                        Impacto
+                    </a>
+
+                    <a routerLink="/contacto" routerLinkActive="text-primary font-bold after:scale-x-100"
+                        class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
+                        Contacto
+                    </a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center h-full">
+                    <button routerLink="/donar"
+                        class="btn bg-primary hover:bg-primary-light text-white font-bold px-8 py-2.5 rounded-lg shadow-md shadow-primary/20 transition-all hover:-translate-y-0.5">
+                        Donar
+                    </button>
                 </div>
-                <span class="font-heading font-bold text-2xl tracking-tight text-gray-900">FWSA</span>
-            </div>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-8 lg:space-x-12">
-                <!-- Inicio (Active by default on home) -->
-                <a routerLink="/" routerLinkActive="text-primary font-bold after:scale-x-100"
-                    [routerLinkActiveOptions]="{exact: true}"
-                    class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
-                    Inicio
-                </a>
-
-                <a routerLink="/quienes-somos" routerLinkActive="text-primary font-bold after:scale-x-100"
-                    class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
-                    Quiénes Somos
-                </a>
-
-                <a routerLink="/equipo" routerLinkActive="text-primary font-bold after:scale-x-100"
-                    class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
-                    Equipo
-                </a>
-
-                <a routerLink="/programas" routerLinkActive="text-primary font-bold after:scale-x-100"
-                    class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
-                    Programas
-                </a>
-
-                <a routerLink="/impacto" routerLinkActive="text-primary font-bold after:scale-x-100"
-                    class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
-                    Impacto
-                </a>
-
-                <a routerLink="/contacto" routerLinkActive="text-primary font-bold after:scale-x-100"
-                    class="relative text-gray-600 hover:text-primary font-medium transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transform after:scale-x-0 after:transition-transform after:origin-left hover:after:scale-x-100">
-                    Contacto
-                </a>
-            </nav>
-
-            <!-- CTA Button -->
-            <div class="hidden md:flex items-center">
-                <button routerLink="/donar"
-                    class="btn bg-primary hover:bg-primary-light text-white font-bold px-8 py-2.5 rounded-lg shadow-md shadow-primary/20 transition-all hover:-translate-y-0.5">
-                    Donar
-                </button>
-            </div>
-
-            <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center">
-                <button (click)="toggleMenu()" class="text-gray-600 hover:text-primary focus:outline-none p-2">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                        <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button (click)="toggleMenu()"
+                        class="text-gray-600 hover:text-primary focus:outline-none p-2 relative z-[70]">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                            <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu Overlay (Now correctly covers the entire screen) -->
     <div *ngIf="isMenuOpen"
-        class="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto">
-        <div class="px-4 pt-4 pb-6 space-y-2">
+        class="md:hidden fixed inset-0 bg-black/60 backdrop-blur-[2px] z-[40] transition-opacity duration-300"
+        (click)="toggleMenu()">
+    </div>
+
+    <!-- Mobile Menu Container -->
+    <div *ngIf="isMenuOpen"
+        class="md:hidden bg-white border-t border-gray-100 fixed w-full left-0 shadow-2xl z-[55] max-h-[85vh] overflow-y-auto animate-in slide-in-from-top duration-300 rounded-b-[2rem]">
+        <div class="px-6 pt-4 pb-10 space-y-1">
             <a routerLink="/" (click)="toggleMenu()" routerLinkActive="text-primary bg-orange-50 font-bold"
                 [routerLinkActiveOptions]="{exact: true}"
-                class="block px-4 py-2.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors">Inicio</a>
+                class="block px-4 py-3.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-2xl transition-all">Inicio</a>
+
             <a routerLink="/quienes-somos" (click)="toggleMenu()" routerLinkActive="text-primary bg-orange-50 font-bold"
-                class="block px-4 py-2.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors">Quiénes
+                class="block px-4 py-3.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-2xl transition-all">Quiénes
                 Somos</a>
+
             <a routerLink="/equipo" (click)="toggleMenu()" routerLinkActive="text-primary bg-orange-50 font-bold"
-                class="block px-4 py-2.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors">Equipo</a>
+                class="block px-4 py-3.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-2xl transition-all">Equipo</a>
+
             <a routerLink="/programas" (click)="toggleMenu()" routerLinkActive="text-primary bg-orange-50 font-bold"
-                class="block px-4 py-2.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors">Programas</a>
+                class="block px-4 py-3.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-2xl transition-all">Programas</a>
+
             <a routerLink="/impacto" (click)="toggleMenu()" routerLinkActive="text-primary bg-orange-50 font-bold"
-                class="block px-4 py-2.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors">Impacto</a>
+                class="block px-4 py-3.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-2xl transition-all">Impacto</a>
+
             <a routerLink="/contacto" (click)="toggleMenu()" routerLinkActive="text-primary bg-orange-50 font-bold"
-                class="block px-4 py-2.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors">Contacto</a>
-            <div class="pt-6 mt-4 border-t border-gray-100">
+                class="block px-4 py-3.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-2xl transition-all">Contacto</a>
+
+            <div class="pt-6 mt-4 border-t border-gray-100 px-2">
                 <button routerLink="/donar" (click)="toggleMenu()"
-                    class="w-full btn bg-primary hover:bg-primary-light text-white font-bold py-3.5 rounded-xl shadow-md text-base">
+                    class="w-full bg-primary hover:bg-primary-light text-white font-bold py-4 rounded-2xl shadow-lg shadow-primary/20 text-base active:scale-[0.98] transition-all">
                     Donar Ahora
                 </button>
             </div>

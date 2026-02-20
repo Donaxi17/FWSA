@@ -4,19 +4,10 @@
 
             <!-- Col 1: Brand & Desc -->
             <div class="space-y-6 text-center md:text-left">
-                <a routerLink="/" class="flex items-center gap-2 justify-center md:justify-start cursor-pointer group">
-                    <!-- Logo Icon -->
-                    <div class="w-8 h-8 text-primary group-hover:scale-110 transition-transform">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
-                            <path
-                                d="M12 2L2 22h20L12 2zm0 3.5L18.5 20H5.5L12 5.5z M12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                        </svg>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-heading font-bold text-xl leading-none text-gray-900">FWSA</span>
-                        <span
-                            class="font-heading font-bold text-xs tracking-wider text-primary uppercase">Fundación</span>
-                    </div>
+                <a routerLink="/"
+                    class="flex flex-col items-center md:items-start gap-2 justify-center md:justify-start cursor-pointer group">
+                    <img src="/fwsa-logo-no-bg.png" alt="FWSA Logo"
+                        class="h-20 md:h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
                 </a>
                 <div class="flex space-x-3 justify-center md:justify-start">
                     <!-- Social Icons (Light theme) -->
@@ -65,7 +56,7 @@
                 <ul class="space-y-4 text-xs font-medium text-gray-600">
                     <li><a routerLink="/donar" class="hover:text-primary transition-colors cursor-pointer">Hacer una
                             Donación</a></li>
-                    <li><a routerLink="/unete"
+                    <li><a routerLink="/donar"
                             class="hover:text-primary transition-colors cursor-pointer">Voluntariado</a></li>
                     <li><a routerLink="/unete" class="hover:text-primary transition-colors cursor-pointer">Vacantes</a>
                     </li>
