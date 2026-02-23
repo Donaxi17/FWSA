@@ -23,56 +23,57 @@
 
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-2">Principal</div>
 
-            <button (click)="switchView('programas')" [class.bg-orange-50]="currentView === 'programas'"
-                [class.text-orange-600]="currentView === 'programas'" [class.shadow-sm]="currentView === 'programas'"
-                [class.border-orange-100]="currentView === 'programas'"
-                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-orange-600 transition-all duration-200 group border border-transparent">
-                <svg [class.text-orange-500]="currentView === 'programas'"
-                    class="w-5 h-5 mr-3 transition-colors group-hover:text-orange-500" fill="none" viewBox="0 0 24 24"
+            <button (click)="switchView('programas')" [class.bg-primary]="currentView === 'programas'"
+                [class.text-white]="currentView === 'programas'" [class.shadow-lg]="currentView === 'programas'"
+                [ngClass]="{'shadow-primary/30': currentView === 'programas'}"
+                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-primary transition-all duration-300 group border border-transparent mb-1">
+                <svg [class.text-white]="currentView === 'programas'"
+                    class="w-5 h-5 mr-3 transition-colors group-hover:text-primary" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                <span class="font-medium">Programas</span>
+                <span class="font-bold">Programas</span>
             </button>
 
-            <button (click)="switchView('vacantes')" [class.bg-orange-50]="currentView === 'vacantes'"
-                [class.text-orange-600]="currentView === 'vacantes'" [class.shadow-sm]="currentView === 'vacantes'"
-                [class.border-orange-100]="currentView === 'vacantes'"
-                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-orange-600 transition-all duration-200 group border border-transparent">
-                <svg [class.text-orange-500]="currentView === 'vacantes'"
-                    class="w-5 h-5 mr-3 transition-colors group-hover:text-orange-500" fill="none" viewBox="0 0 24 24"
+            <button (click)="switchView('vacantes')" [class.bg-primary]="currentView === 'vacantes'"
+                [class.text-white]="currentView === 'vacantes'" [class.shadow-lg]="currentView === 'vacantes'"
+                [ngClass]="{'shadow-primary/30': currentView === 'vacantes'}"
+                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-primary transition-all duration-300 group border border-transparent mb-1">
+                <svg [class.text-white]="currentView === 'vacantes'"
+                    class="w-5 h-5 mr-3 transition-colors group-hover:text-primary" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span class="font-medium">Vacantes</span>
+                <span class="font-bold">Vacantes</span>
             </button>
 
-            <button (click)="switchView('equipo')" [class.bg-orange-50]="currentView === 'equipo'"
-                [class.text-orange-600]="currentView === 'equipo'" [class.shadow-sm]="currentView === 'equipo'"
-                [class.border-orange-100]="currentView === 'equipo'"
-                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-orange-600 transition-all duration-200 group border border-transparent">
-                <svg [class.text-orange-500]="currentView === 'equipo'"
-                    class="w-5 h-5 mr-3 transition-colors group-hover:text-orange-500" fill="none" viewBox="0 0 24 24"
+            <button *ngIf="currentUserRole === 'Admin'" (click)="switchView('equipo')"
+                [class.bg-primary]="currentView === 'equipo'" [class.text-white]="currentView === 'equipo'"
+                [class.shadow-lg]="currentView === 'equipo'" [ngClass]="{'shadow-primary/30': currentView === 'equipo'}"
+                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-primary transition-all duration-300 group border border-transparent mb-1">
+                <svg [class.text-white]="currentView === 'equipo'"
+                    class="w-5 h-5 mr-3 transition-colors group-hover:text-primary" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <span class="font-medium">Equipo</span>
+                <span class="font-bold">Equipo</span>
             </button>
 
-            <button (click)="switchView('usuarios')" [class.bg-orange-50]="currentView === 'usuarios'"
-                [class.text-orange-600]="currentView === 'usuarios'" [class.shadow-sm]="currentView === 'usuarios'"
-                [class.border-orange-100]="currentView === 'usuarios'"
-                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-orange-600 transition-all duration-200 group border border-transparent">
-                <svg [class.text-orange-500]="currentView === 'usuarios'"
-                    class="w-5 h-5 mr-3 transition-colors group-hover:text-orange-500" fill="none" viewBox="0 0 24 24"
+            <button *ngIf="currentUserRole === 'Admin'" (click)="switchView('usuarios')"
+                [class.bg-primary]="currentView === 'usuarios'" [class.text-white]="currentView === 'usuarios'"
+                [class.shadow-lg]="currentView === 'usuarios'"
+                [ngClass]="{'shadow-primary/30': currentView === 'usuarios'}"
+                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-primary transition-all duration-300 group border border-transparent mb-1">
+                <svg [class.text-white]="currentView === 'usuarios'"
+                    class="w-5 h-5 mr-3 transition-colors group-hover:text-primary" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-                <span class="font-medium">Usuarios</span>
+                <span class="font-bold">Usuarios</span>
             </button>
         </nav>
 
@@ -89,9 +90,9 @@
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-bold text-gray-900 truncate">
-                        {{ user.displayName || 'Administrador' }}
+                        {{ user.displayName || 'Usuario' }}
                     </p>
-                    <p class="text-xs text-gray-500 truncate">{{ user.email }}</p>
+                    <p class="text-[10px] font-black uppercase text-primary tracking-wider">{{ currentUserRole }}</p>
                 </div>
             </div>
             <button (click)="onLogout()"
@@ -309,7 +310,8 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
-                                <input type="password" [(ngModel)]="newUser.password"
+                                <input type="password" [(ngModel)]="newUser.password" minlength="6"
+                                    placeholder="Mínimo 6 caracteres"
                                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-100 focus:border-orange-500 outline-none transition-all">
                             </div>
                             <div>
@@ -536,14 +538,146 @@
             </div>
 
             <!-- Equipo View -->
-            <div *ngIf="currentView === 'equipo' && !isCreatingProgram"
-                class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center h-[400px] flex flex-col items-center justify-center">
-                <svg class="w-16 h-16 text-gray-200 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <h4 class="text-xl font-bold text-gray-900">Módulo de Equipo</h4>
-                <p class="text-gray-500">Pronto podrás gestionar el personal aquí.</p>
+            <div *ngIf="currentView === 'equipo' && !isCreatingMember" class="space-y-6">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Personal de la Fundación</h3>
+                        <p class="text-gray-500">Gestiona los miembros que aparecen en la página de Equipo.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button *ngIf="team.length < 5" (click)="seedInitialTeam()"
+                            class="bg-white border border-gray-200 text-gray-600 px-6 py-3 rounded-2xl font-bold hover:bg-gray-50 transition-all flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            Restaurar Originales
+                        </button>
+                        <button (click)="showCreateMemberForm()"
+                            class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-2xl font-bold shadow-lg shadow-orange-500/30 transition-all flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                            Nuevo Miembro
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div *ngFor="let member of team"
+                        class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 group hover:shadow-xl transition-all duration-500">
+                        <div class="relative aspect-square overflow-hidden">
+                            <img [src]="member.image" [alt]="member.name"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-6">
+                                <div class="flex gap-3">
+                                    <button (click)="editMember(member)"
+                                        class="p-3 bg-white/20 backdrop-blur-md rounded-xl text-white hover:bg-white/40 transition-all">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </button>
+                                    <button (click)="deleteMember(member.id!)"
+                                        class="p-3 bg-red-500/40 backdrop-blur-md rounded-xl text-white hover:bg-red-500/60 transition-all">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <h4 class="font-bold text-gray-900 leading-tight mb-1">{{member.name}}</h4>
+                            <p class="text-[10px] font-black text-orange-500 uppercase tracking-widest">{{member.role}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member Form -->
+            <div *ngIf="isCreatingMember" class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-[2.5rem] shadow-2xl border border-gray-100 overflow-hidden">
+                    <div class="p-8 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+                        <h2 class="text-2xl font-bold text-gray-900">{{ editingMemberId ? 'Editar Miembro' : 'Nuevo
+                            Miembro del Equipo' }}</h2>
+                        <button (click)="isCreatingMember = false" class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-8 space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Nombre
+                                    Completo</label>
+                                <input type="text" [(ngModel)]="newMember.name"
+                                    class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all"
+                                    placeholder="Ej: Juan Pérez">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Cargo
+                                    / Rol</label>
+                                <input type="text" [(ngModel)]="newMember.role"
+                                    class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all"
+                                    placeholder="Ej: Director General">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Descripción
+                                Breve (se muestra al girar la tarjeta)</label>
+                            <textarea [(ngModel)]="newMember.description" rows="3"
+                                class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all"
+                                placeholder="Escribe una breve descripción del rol o frase del miembro..."></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Foto
+                                    del Miembro</label>
+                                <div class="relative">
+                                    <input type="file" (change)="onFileSelected($event)" accept="image/*" class="hidden"
+                                        #memberFileInput>
+                                    <button type="button" (click)="memberFileInput.click()"
+                                        class="w-full px-5 py-4 rounded-2xl border-2 border-dashed border-gray-200 hover:border-orange-500 hover:bg-orange-50 transition-all flex items-center justify-center gap-3 text-sm font-medium text-gray-600">
+                                        <svg class="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        {{ selectedFile ? selectedFile.name : 'Subir o cambiar foto' }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Orden
+                                    de Aparición</label>
+                                <input type="number" [(ngModel)]="newMember.order"
+                                    class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 border-t border-gray-100 bg-gray-50 flex items-center justify-end gap-4">
+                        <button (click)="isCreatingMember = false"
+                            class="px-8 py-4 text-gray-600 font-bold hover:text-gray-900 transition-colors">Cancelar</button>
+                        <button (click)="saveMember()" [disabled]="isLoading"
+                            class="px-10 py-4 rounded-2xl bg-orange-500 text-white font-black shadow-xl shadow-orange-500/40 hover:bg-orange-600 active:scale-95 transition-all flex items-center gap-3">
+                            <span *ngIf="isLoading"
+                                class="animate-spin h-5 w-5 border-2 border-white/20 border-t-white rounded-full"></span>
+                            {{ isLoading ? 'Guardando...' : (editingMemberId ? 'Actualizar Miembro' : 'Añadir Miembro')
+                            }}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

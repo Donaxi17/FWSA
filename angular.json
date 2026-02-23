@@ -25,6 +25,8 @@
                 "glob": "**/*",
                 "input": "public"
               },
+              "public/favicon-fwsa-no-bg.png",
+              "public/fwsa-logo-no-bg.png",
               "src/favicon.ico",
               "src/robots.txt",
               "src/sitemap.xml"

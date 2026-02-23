@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, NgZone } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, signOut, user, User, sendPasswordResetEmail, createUserWithEmailAndPassword, updateProfile, getAuth, authState, onAuthStateChanged } from '@angular/fire/auth';
 import { initializeApp, getApp, getApps, FirebaseApp } from '@angular/fire/app';
 import { Observable, BehaviorSubject, of } from 'rxjs';
@@ -10,30 +10,37 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
     private auth = inject(Auth);
+    private ngZone = inject(NgZone);
     private authReadySubject = new BehaviorSubject<boolean>(false);
 
     // Observable that tells us if Firebase has finished the local session check
     authReady$ = this.authReadySubject.asObservable();
 
-    user$: Observable<User | null> = authState(this.auth);
+    user$: Observable<User | null> = this.ngZone.run(() => authState(this.auth)); // Wrap authState
 
     private secondaryAuth: Auth | null = null;
 
     constructor() {
         // This listener is independent of subscriptions and will trigger as soon as Firebase is ready
-        onAuthStateChanged(this.auth, () => {
-            if (!this.authReadySubject.value) {
-                this.authReadySubject.next(true);
-            }
+        this.ngZone.run(() => { // Wrap onAuthStateChanged
+            onAuthStateChanged(this.auth, () => {
+                if (!this.authReadySubject.value) {
+                    this.authReadySubject.next(true);
+                }
+            });
         });
     }
 
     login(email: string, pass: string) {
-        return signInWithEmailAndPassword(this.auth, email, pass);
+        return this.ngZone.run(() =>
+            signInWithEmailAndPassword(this.auth, email, pass)
+        );
     }
 
     resetPassword(email: string) {
-        return sendPasswordResetEmail(this.auth, email);
+        return this.ngZone.run(() =>
+            sendPasswordResetEmail(this.auth, email)
+        );
     }
 
     private getSecondaryAuth() {
@@ -55,19 +62,20 @@ export class AuthService {
 
     // Creates a user without logging out the current admin
     async adminCreateUser(name: string, email: string, pass: string) {
-        const sAuth = this.getSecondaryAuth();
-
-        try {
-            const userCredential = await createUserWithEmailAndPassword(sAuth, email, pass);
-            await updateProfile(userCredential.user, { displayName: name });
-            await signOut(sAuth); // Clear secondary session
-            return userCredential.user;
-        } catch (error) {
-            throw error;
-        }
+        return this.ngZone.run(async () => {
+            const sAuth = this.getSecondaryAuth();
+            try {
+                const userCredential = await createUserWithEmailAndPassword(sAuth, email, pass);
+                await updateProfile(userCredential.user, { displayName: name });
+                await signOut(sAuth); // Clear secondary session
+                return userCredential.user;
+            } catch (error) {
+                throw error;
+            }
+        });
     }
 
     logout() {
-        return signOut(this.auth);
+        return this.ngZone.run(() => signOut(this.auth));
     }
 }

@@ -38,161 +38,24 @@
 <section class="py-12 md:py-32 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-            <!-- Miembro 1 -->
-            <div class="group perspective-1000" (click)="toggleFlip(1, $event)">
+            <!-- Miembro Dinámico -->
+            <div *ngFor="let member of team$ | async" class="group perspective-1000"
+                (click)="toggleFlip(member.id!, $event)">
                 <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700 group-hover:rotate-y-180"
-                    [class.rotate-y-180]="activeMemberId === 1">
+                    [class.rotate-y-180]="activeMemberId === member.id">
                     <div
                         class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
-                            alt="Yisleine Torres" class="w-full h-full object-cover">
+                        <img [src]="member.image" [alt]="member.name" class="w-full h-full object-cover">
                     </div>
                     <div
                         class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-white font-black text-lg mb-4 uppercase">Representante Legal</h4>
-                        <p class="text-gray-300 text-xs italic">"Representa legalmente a la Fundación y asegura el
-                            correcto funcionamiento institucional."</p>
+                        <h4 class="text-white font-black text-lg mb-4 uppercase">{{member.role}}</h4>
+                        <p class="text-gray-300 text-xs italic">"{{member.description}}"</p>
                     </div>
                 </div>
                 <div class="text-center">
-                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">Yisleine Karina Torres
-                        Turizo</h3>
-                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Representante Legal</p>
-                </div>
-            </div>
-
-            <!-- Miembro 2 -->
-            <div class="group perspective-1000" (click)="toggleFlip(2, $event)">
-                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700 group-hover:rotate-y-180"
-                    [class.rotate-y-180]="activeMemberId === 2">
-                    <div
-                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800"
-                            alt="Rodolfo Torres" class="w-full h-full object-cover">
-                    </div>
-                    <div
-                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-white font-black text-lg mb-4 uppercase">Presidente</h4>
-                        <p class="text-gray-300 text-xs italic">"Lidera la dirección estratégica de la Fundación y
-                            coordina el desarrollo de planes."</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">Rodolfo Torres Castillo</h3>
-                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Presidente</p>
-                </div>
-            </div>
-
-            <!-- Miembro 3 -->
-            <div class="group perspective-1000" (click)="toggleFlip(3, $event)">
-                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700 group-hover:rotate-y-180"
-                    [class.rotate-y-180]="activeMemberId === 3">
-                    <div
-                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800"
-                            alt="Yaniris Duarte" class="w-full h-full object-cover">
-                    </div>
-                    <div
-                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-white font-black text-lg mb-4 uppercase">Vicepresidente</h4>
-                        <p class="text-gray-300 text-xs italic">"Apoya al presidente y fortalece la gestión y
-                            seguimiento de las actividades."</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">Yaniris Duarte Bula</h3>
-                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Vicepresidente</p>
-                </div>
-            </div>
-
-            <!-- Miembro 4 -->
-            <div class="group perspective-1000" (click)="toggleFlip(4, $event)">
-                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700 group-hover:rotate-y-180"
-                    [class.rotate-y-180]="activeMemberId === 4">
-                    <div
-                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=800"
-                            alt="Yuranis Bula" class="w-full h-full object-cover">
-                    </div>
-                    <div
-                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-white font-black text-lg mb-4 uppercase">Secretaria</h4>
-                        <p class="text-gray-300 text-xs italic">"Gestiona la documentación y comunicaciones, apoyando
-                            los procesos administrativos."</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">Yuranis Bula Espinosa</h3>
-                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Secretaria</p>
-                </div>
-            </div>
-
-            <!-- Miembro 5 -->
-            <div class="group perspective-1000" (click)="toggleFlip(5, $event)">
-                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700 group-hover:rotate-y-180"
-                    [class.rotate-y-180]="activeMemberId === 5">
-                    <div
-                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800"
-                            alt="Yovert Duarte" class="w-full h-full object-cover">
-                    </div>
-                    <div
-                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-white font-black text-lg mb-4 uppercase">Tesorero</h4>
-                        <p class="text-gray-300 text-xs italic">"Administra los recursos financieros y garantiza su uso
-                            transparente."</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">Yovert Alberto Duarte Bula
-                    </h3>
-                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Tesorero</p>
-                </div>
-            </div>
-
-            <!-- Miembro 6 -->
-            <div class="group perspective-1000" (click)="toggleFlip(6, $event)">
-                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700 group-hover:rotate-y-180"
-                    [class.rotate-y-180]="activeMemberId === 6">
-                    <div
-                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800"
-                            alt="Yonelis Turizo" class="w-full h-full object-cover">
-                    </div>
-                    <div
-                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-white font-black text-lg mb-4 uppercase">Vocal</h4>
-                        <p class="text-gray-300 text-xs italic">"Apoya la toma de decisiones y acompaña la ejecución de
-                            programas."</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">Yonelis Beatriz Turizo
-                        Choles</h3>
-                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Vocal</p>
-                </div>
-            </div>
-
-            <!-- Miembro 7 -->
-            <div class="group perspective-1000" (click)="toggleFlip(7, $event)">
-                <div class="relative w-full aspect-[4/4.5] mb-6 preserve-3d transition-transform duration-700 group-hover:rotate-y-180"
-                    [class.rotate-y-180]="activeMemberId === 7">
-                    <div
-                        class="absolute inset-0 backface-hidden rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-                        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=800"
-                            alt="Abigail Torres" class="w-full h-full object-cover">
-                    </div>
-                    <div
-                        class="absolute inset-0 backface-hidden rotate-y-180 rounded-[2rem] bg-gray-900 p-8 flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-white font-black text-lg mb-4 uppercase">Vocal</h4>
-                        <p class="text-gray-300 text-xs italic">"Contribuye con propuestas y apoyo en las actividades
-                            institucionales."</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">Abigail Yiseth Torres Turizo
-                    </h3>
-                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">Vocal</p>
+                    <h3 class="text-base font-black text-gray-900 uppercase tracking-tight">{{member.name}}</h3>
+                    <p class="text-primary font-bold text-[9px] uppercase tracking-widest">{{member.role}}</p>
                 </div>
             </div>
         </div>
