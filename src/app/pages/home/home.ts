@@ -51,8 +51,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       title: 'Inicio',
       description: 'Fundación Wopu Süpula Atüja (FWSA) - Organización sin ánimo de lucro dedicada al desarrollo integral de comunidades vulnerables en La Guajira mediante educación, emprendimiento y sostenibilidad.',
       keywords: 'FWSA, fundación La Guajira, desarrollo social Colombia, educación vulnerable, emprendimiento social, Wopu Süpula Atüja',
-      ogUrl: 'https://www.fwsa.org.co/',
-      ogImage: 'https://www.fwsa.org.co/assets/images/home-og.png'
+      ogUrl: 'https://funwsa.org/',
+      ogImage: 'https://funwsa.org/assets/images/home-og.png'
     });
 
     // Agregar Schema de Organización

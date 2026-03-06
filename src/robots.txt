@@ -11,7 +11,7 @@ Disallow: /*.js$
 Disallow: /*.css$
 
 # Ubicación del sitemap
-Sitemap: https://www.fwsa.org.co/sitemap.xml
+Sitemap: https://funwsa.org/sitemap.xml
 
 # Configuración específica para bots principales
 User-agent: Googlebot

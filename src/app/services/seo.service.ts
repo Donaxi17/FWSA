@@ -23,7 +23,7 @@ export class SeoService {
     private titleService = inject(Title);
 
     // Datos base de la organización
-    private baseUrl = 'https://www.fwsa.org.co'; // Actualizar con tu dominio real
+    private baseUrl = 'https://funwsa.org'; // Actualizar con tu dominio real
     private defaultImage = '/assets/images/og-image.png'; // Imagen por defecto para compartir
     private siteName = 'Fundación Wopu Süpula Atüja (FWSA)';
 
@@ -95,7 +95,7 @@ export class SeoService {
                 '@type': 'ContactPoint',
                 'telephone': '+57-300-525-1713',
                 'contactType': 'customer service',
-                'email': 'contacto@fwsa.org.co',
+                'email': 'contacto@funwsa.org',
                 'availableLanguage': 'Spanish'
             },
             'sameAs': [
