@@ -106,9 +106,9 @@ import { VacanciesService, Vacancy } from '../../../services/vacancies.service';
                         </div>
                         <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">No hay vacantes abiertas por ahora</h3>
                         <p class="text-gray-500 max-w-md mx-auto font-medium mb-10 italic leading-relaxed">
-                            Aun así, queremos conocerte. Envíanos tu hoja de vida a <strong>social&#64;fwsa.org</strong> y te contactaremos para futuras oportunidades.
+                            Aun así, queremos conocerte. Envíanos tu hoja de vida a <strong>contactofwsa&#64;gmail.com</strong> y te contactaremos para futuras oportunidades.
                         </p>
-                        <a href="mailto:social@fwsa.org" class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-orange-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-gray-900/10">
+                        <a href="mailto:contactofwsa@gmail.com" class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-orange-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-gray-900/10">
                             Enviar CV por Email <i class="fas fa-paper-plane"></i>
                         </a>
                     </div>

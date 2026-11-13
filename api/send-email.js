@@ -59,7 +59,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 from: 'FWSA Sistema <onboarding@resend.dev>',
-                to: ['donaxjimenez00@gmail.com'], // Tu correo institucional
+                to: ['contactofwsa@gmail.com'], // Correo institucional
                 subject: subject,
                 html: htmlContent,
             }),

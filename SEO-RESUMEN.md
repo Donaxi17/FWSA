@@ -289,8 +289,8 @@ Antes del lanzamiento, confirma y actualiza:
 
 ### En `seo.service.ts`:
 - **URL base**: `https://www.fwsa.org.co`
-- **Email**: `contacto@fwsa.org.co`
-- **Teléfono**: `+57 300 525 1713`
+- **Email**: `contactofwsa@gmail.com`
+- **Teléfono**: `+57 311 495 2911`
 - **Redes sociales** (URLs reales):
   - Facebook
   - Instagram

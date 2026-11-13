@@ -93,9 +93,9 @@ export class SeoService {
             },
             'contactPoint': {
                 '@type': 'ContactPoint',
-                'telephone': '+57-300-525-1713',
+                'telephone': '+57-311-495-2911',
                 'contactType': 'customer service',
-                'email': 'contacto@funwsa.org',
+                'email': 'contactofwsa@gmail.com',
                 'availableLanguage': 'Spanish'
             },
             'sameAs': [

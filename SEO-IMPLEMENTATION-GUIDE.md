@@ -115,7 +115,7 @@ this.seoService.updateMetaTags({
 ```typescript
 this.seoService.updateMetaTags({
   title: 'Contacto',
-  description: 'Contáctanos para más información sobre nuestros programas, voluntariado o donaciones. Ubicados en La Guajira, Colombia. WhatsApp: +57 300 525 1713',
+  description: 'Contáctanos para más información sobre nuestros programas, voluntariado o donaciones. Ubicados en La Guajira, Colombia. WhatsApp: +57 311 495 2911',
   keywords: 'contacto FWSA, donar fundación, voluntariado La Guajira, contacto fundación Colombia',
   ogUrl: 'https://www.fwsa.org.co/contacto',
   ogImage: 'https://www.fwsa.org.co/assets/images/contacto-og.png'
@@ -270,8 +270,8 @@ Crea estas imágenes para compartir en redes sociales:
 Recuerda actualizar estos datos en `seo.service.ts`:
 
 - **Website URL**: `https://www.fwsa.org.co`
-- **Email**: `contacto@fwsa.org.co`
-- **Teléfono**: `+57 300 525 1713`
+- **Email**: `contactofwsa@gmail.com`
+- **Teléfono**: `+57 311 495 2911`
 - **Redes Sociales**: URLs reales de Facebook, Instagram, LinkedIn
 
 ---
