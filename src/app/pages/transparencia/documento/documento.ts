@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -19,6 +19,7 @@ export class TransparenciaDocumentoComponent implements OnInit, OnDestroy {
     private readonly sanitizer = inject(DomSanitizer);
     private readonly seo = inject(SeoService);
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly ngZone = inject(NgZone);
 
     readonly formatFileSize = formatFileSize;
     readonly extLabel = fileExtensionLabel;
@@ -53,13 +54,13 @@ export class TransparenciaDocumentoComponent implements OnInit, OnDestroy {
 
             const file = await this.service.loadFile(d.fileId!, pct => {
                 this.progress = pct;
-                this.cdr.detectChanges();
+                this.refresh();
             });
             this.objectUrl = URL.createObjectURL(file.blob);
             this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.objectUrl);
             this.kind = file.type === 'application/pdf' ? 'pdf' : file.type.startsWith('image/') ? 'image' : 'other';
             this.state = 'ready';
-            this.cdr.detectChanges();
+            this.refresh();
         } catch (err: any) {
             console.warn('Error cargando documento:', err?.message || err);
             this.fail(err?.code === 'permission-denied'
@@ -75,10 +76,18 @@ export class TransparenciaDocumentoComponent implements OnInit, OnDestroy {
     private fail(message: string) {
         this.state = 'error';
         this.errorMessage = message;
-        this.cdr.detectChanges();
+        this.refresh();
     }
 
     reload() {
         window.location.reload();
+    }
+
+    /**
+     * Redibuja dentro de la zona de Angular. Si se redibuja fuera (p. ej. tras una
+     * respuesta de Firebase), los botones creados quedan sin reaccionar a los clics.
+     */
+    private refresh() {
+        this.ngZone.run(() => this.cdr.detectChanges());
     }
 }

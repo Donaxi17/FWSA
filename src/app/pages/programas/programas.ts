@@ -1,4 +1,5 @@
-import { Component, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, ChangeDetectorRef, NgZone } from '@angular/core';
+import { runInZone } from '../../services/transparency.service';
 import { CommonModule } from '@angular/common';
 import { ProgramsService, Program } from '../../services/programs.service';
 
@@ -12,6 +13,7 @@ import { ProgramsService, Program } from '../../services/programs.service';
 export class ProgramasComponent {
     private programsService = inject(ProgramsService);
     private cdr = inject(ChangeDetectorRef);
+    private ngZone = inject(NgZone);
     programas: Program[] = [];
     showDocsModal = false;
 
@@ -31,9 +33,9 @@ export class ProgramasComponent {
     ];
 
     constructor() {
-        this.programsService.getPrograms().subscribe(data => {
+        this.programsService.getPrograms().pipe(runInZone(this.ngZone)).subscribe(data => {
             this.programas = data;
-            this.cdr.detectChanges();
+            this.refresh();
         });
     }
 
@@ -67,20 +69,28 @@ export class ProgramasComponent {
         this.selectedCategory = this.tempCategory;
         this.selectedStatus = this.tempStatus;
         this.showFilterMenu = false;
-        this.cdr.detectChanges();
+        this.refresh();
     }
 
     setCategory(cat: string) {
         this.tempCategory = cat;
-        this.cdr.detectChanges();
+        this.refresh();
     }
 
     setStatus(status: string) {
         this.tempStatus = status;
-        this.cdr.detectChanges();
+        this.refresh();
     }
 
     toggleDocsModal() {
         this.showDocsModal = !this.showDocsModal;
+    }
+
+    /**
+     * Redibuja dentro de la zona de Angular. Si se redibuja fuera (p. ej. tras una
+     * respuesta de Firebase), los botones creados quedan sin reaccionar a los clics.
+     */
+    private refresh() {
+        this.ngZone.run(() => this.cdr.detectChanges());
     }
 }

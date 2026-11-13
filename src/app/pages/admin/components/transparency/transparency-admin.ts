@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject, ChangeDetectorRef, OnDestroy, HostListener } from '@angular/core';
+import { Component, EventEmitter, Output, inject, ChangeDetectorRef, OnDestroy, HostListener, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -21,6 +21,7 @@ export class TransparencyAdminComponent implements OnDestroy {
 
     private readonly service = inject(TransparencyService);
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly ngZone = inject(NgZone);
     private sub?: Subscription;
 
     readonly categories = TRANSPARENCY_CATEGORIES;
@@ -68,7 +69,7 @@ export class TransparencyAdminComponent implements OnDestroy {
                 this.documents = docs;
                 this.loaded = true;
                 this.loadError = '';
-                this.cdr.detectChanges();
+                this.refresh();
             },
             error: err => {
                 console.warn('Firestore Transparency Error:', err?.message || err);
@@ -76,7 +77,7 @@ export class TransparencyAdminComponent implements OnDestroy {
                 this.loadError = err?.code === 'permission-denied'
                     ? 'Firebase no dio permiso para leer los documentos. Revisa las reglas de Firestore.'
                     : 'No se pudieron cargar los documentos. Revisa tu conexión.';
-                this.cdr.detectChanges();
+                this.refresh();
             }
         });
     }
@@ -258,7 +259,7 @@ export class TransparencyAdminComponent implements OnDestroy {
 
         this.isSaving = true;
         this.uploadProgress = 0;
-        this.cdr.detectChanges();
+        this.refresh();
 
         const original = this.editingId ? this.documents.find(d => d.id === this.editingId) : undefined;
         let uploadedFileId: string | null = null;
@@ -281,7 +282,7 @@ export class TransparencyAdminComponent implements OnDestroy {
             if (this.form.source === 'upload' && this.selectedFile) {
                 const res = await this.service.uploadFile(this.selectedFile, data.published, pct => {
                     this.uploadProgress = pct;
-                    this.cdr.detectChanges();
+                    this.refresh();
                 });
                 uploadedFileId = res.fileId;
                 Object.assign(data, { fileId: res.fileId, fileName: res.name, fileSize: res.size, fileType: res.type });
@@ -325,7 +326,7 @@ export class TransparencyAdminComponent implements OnDestroy {
             this.notify.emit({ message, type: 'error' });
             this.isSaving = false;
         } finally {
-            this.cdr.detectChanges();
+            this.refresh();
         }
     }
 
@@ -338,7 +339,7 @@ export class TransparencyAdminComponent implements OnDestroy {
     async confirmDelete() {
         if (!this.pendingDelete) return;
         this.isDeleting = true;
-        this.cdr.detectChanges();
+        this.refresh();
         try {
             await this.service.deleteDocument(this.pendingDelete);
             this.notify.emit({ message: 'Documento eliminado.', type: 'success' });
@@ -347,7 +348,7 @@ export class TransparencyAdminComponent implements OnDestroy {
             this.notify.emit({ message: 'No se pudo eliminar el documento.', type: 'error' });
         } finally {
             this.isDeleting = false;
-            this.cdr.detectChanges();
+            this.refresh();
         }
     }
 
@@ -356,5 +357,13 @@ export class TransparencyAdminComponent implements OnDestroy {
         const date: Date = typeof value?.toDate === 'function' ? value.toDate() : new Date(value);
         if (isNaN(date.getTime())) return '';
         return date.toLocaleDateString('es-CO', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    /**
+     * Redibuja dentro de la zona de Angular. Si se redibuja fuera (p. ej. tras una
+     * respuesta de Firebase), los botones creados quedan sin reaccionar a los clics.
+     */
+    private refresh() {
+        this.ngZone.run(() => this.cdr.detectChanges());
     }
 }

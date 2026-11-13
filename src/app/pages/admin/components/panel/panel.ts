@@ -8,6 +8,7 @@ import { VacanciesService, Vacancy } from '../../../../services/vacancies.servic
 import { UsersService, AdminUser } from '../../../../services/users.service';
 import { TeamService, TeamMember } from '../../../../services/team.service';
 import { TransparencyAdminComponent } from '../transparency/transparency-admin';
+import { runInZone } from '../../../../services/transparency.service';
 
 // El interface User se reemplaza por AdminUser del servicio
 type AdminView = 'programas' | 'equipo' | 'vacantes' | 'usuarios' | 'transparencia';
@@ -70,31 +71,31 @@ export class AdminPanelComponent {
 
     constructor() {
         // Cargar Programas
-        this.programsService.getPrograms().subscribe(data => {
+        this.programsService.getPrograms().pipe(runInZone(this.ngZone)).subscribe(data => {
             this.programs = data;
-            this.cdr.detectChanges();
+            this.refresh();
         });
 
         // Cargar Vacantes
-        this.vacanciesService.getVacancies().subscribe(data => {
+        this.vacanciesService.getVacancies().pipe(runInZone(this.ngZone)).subscribe(data => {
             this.vacancies = data;
-            this.cdr.detectChanges();
+            this.refresh();
         });
 
         // Cargar Usuarios
-        this.usersService.getUsers().subscribe(data => {
+        this.usersService.getUsers().pipe(runInZone(this.ngZone)).subscribe(data => {
             this.users = data;
             this.updateCurrentRole();
-            this.cdr.detectChanges();
+            this.refresh();
         });
 
         // Cargar Equipo
-        this.teamService.getTeam().subscribe(data => {
+        this.teamService.getTeam().pipe(runInZone(this.ngZone)).subscribe(data => {
             this.team = data;
             if (this.team.length === 0) {
                 this.seedInitialTeam();
             }
-            this.cdr.detectChanges();
+            this.refresh();
         });
 
         // Suscribirse a cambios de auth
@@ -108,11 +109,11 @@ export class AdminPanelComponent {
     showToast(message: string, type: 'success' | 'error' = 'success') {
         this.ngZone.run(() => {
             this.toast = { show: true, message, type };
-            this.cdr.detectChanges();
+            this.refresh();
             clearTimeout(this.toastTimer);
             this.toastTimer = setTimeout(() => {
                 this.toast.show = false;
-                this.cdr.detectChanges();
+                this.refresh();
             }, type === 'error' ? 6000 : 3000);
         });
     }
@@ -140,7 +141,7 @@ export class AdminPanelComponent {
                 if (this.currentUserRole === 'Editor' && (this.currentView === 'usuarios' || this.currentView === 'equipo')) {
                     this.currentView = 'programas';
                 }
-                this.cdr.detectChanges();
+                this.refresh();
             }
         };
 
@@ -153,7 +154,7 @@ export class AdminPanelComponent {
 
     async seedInitialTeam() {
         this.isLoading = true;
-        this.cdr.detectChanges();
+        this.refresh();
 
         const initialMembers: TeamMember[] = [
             { name: 'Yisleine Karina Torres Turizo', role: 'Representante Legal', description: 'Representa legalmente a la Fundación y asegura el correcto funcionamiento institucional.', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800', order: 1 },
@@ -170,13 +171,13 @@ export class AdminPanelComponent {
             this.ngZone.run(() => {
                 this.showToast('Equipo original restaurado con éxito.', 'success');
                 this.isLoading = false;
-                this.cdr.detectChanges();
+                this.refresh();
             });
         } catch (error) {
             console.error('Error seeding team:', error);
             this.showToast('Error al restaurar el equipo.', 'error');
             this.isLoading = false;
-            this.cdr.detectChanges();
+            this.refresh();
         }
     }
 
@@ -216,7 +217,7 @@ export class AdminPanelComponent {
         this.isCreatingProgram = true;
         this.editingId = program.id!;
         this.newProgram = { ...program };
-        this.cdr.detectChanges();
+        this.refresh();
     }
 
     async deleteProgram(id: string) {
@@ -237,7 +238,7 @@ export class AdminPanelComponent {
         }
 
         this.isLoading = true;
-        this.cdr.detectChanges(); // Asegura que el spinner se muestre
+        this.refresh(); // Asegura que el spinner se muestre
 
         try {
             let imageUrl = this.newProgram.image || 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000';
@@ -269,7 +270,7 @@ export class AdminPanelComponent {
                 this.selectedFile = null;
                 this.isLoading = false;
                 this.newProgram = { title: '', description: '', category: 'Educación', status: 'Activo', image: '' };
-                this.cdr.detectChanges();
+                this.refresh();
             });
 
         } catch (error) {
@@ -277,7 +278,7 @@ export class AdminPanelComponent {
             this.showToast('Error al guardar el programa.', 'error');
             this.ngZone.run(() => {
                 this.isLoading = false;
-                this.cdr.detectChanges();
+                this.refresh();
             });
         }
     }
@@ -295,7 +296,7 @@ export class AdminPanelComponent {
         this.editingVacancyId = vacancy.id!;
         this.newVacancy = { ...vacancy };
         this.vacancyRequirementsText = vacancy.requirements.join(', ');
-        this.cdr.detectChanges();
+        this.refresh();
     }
 
     async deleteVacancy(id: string) {
@@ -316,7 +317,7 @@ export class AdminPanelComponent {
         }
 
         this.isLoading = true;
-        this.cdr.detectChanges();
+        this.refresh();
 
         try {
             const reqs = this.vacancyRequirementsText ? this.vacancyRequirementsText.split(',').map(r => r.trim()).filter(r => r !== '') : [];
@@ -344,14 +345,14 @@ export class AdminPanelComponent {
                 this.isLoading = false;
                 this.newVacancy = { title: '', location: '', type: 'Tiempo Completo', description: '', requirements: [], status: 'Abierta' };
                 this.vacancyRequirementsText = '';
-                this.cdr.detectChanges();
+                this.refresh();
             });
 
         } catch (error) {
             console.error('Error saving vacancy:', error);
             this.showToast('Error al guardar la vacante.', 'error');
             this.isLoading = false;
-            this.cdr.detectChanges();
+            this.refresh();
         }
     }
 
@@ -366,7 +367,7 @@ export class AdminPanelComponent {
         this.isCreatingMember = true;
         this.editingMemberId = member.id!;
         this.newMember = { ...member };
-        this.cdr.detectChanges();
+        this.refresh();
     }
 
     async deleteMember(id: string) {
@@ -387,7 +388,7 @@ export class AdminPanelComponent {
         }
 
         this.isLoading = true;
-        this.cdr.detectChanges();
+        this.refresh();
 
         try {
             let imageUrl = this.newMember.image || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800';
@@ -414,13 +415,13 @@ export class AdminPanelComponent {
                 this.editingMemberId = null;
                 this.selectedFile = null;
                 this.isLoading = false;
-                this.cdr.detectChanges();
+                this.refresh();
             });
         } catch (error) {
             console.error('Error saving member:', error);
             this.showToast('Error al guardar el miembro.', 'error');
             this.isLoading = false;
-            this.cdr.detectChanges();
+            this.refresh();
         }
     }
 
@@ -449,7 +450,7 @@ export class AdminPanelComponent {
         }
 
         this.isLoading = true;
-        this.cdr.detectChanges();
+        this.refresh();
 
         try {
             const firebaseUser = await this.authService.adminCreateUser(
@@ -477,7 +478,7 @@ export class AdminPanelComponent {
         } finally {
             this.ngZone.run(() => {
                 this.isLoading = false;
-                this.cdr.detectChanges();
+                this.refresh();
             });
         }
     }
@@ -503,5 +504,13 @@ export class AdminPanelComponent {
 
     onLogout() {
         this.logout.emit();
+    }
+
+    /**
+     * Redibuja dentro de la zona de Angular. Si se redibuja fuera (p. ej. tras una
+     * respuesta de Firebase), los botones creados quedan sin reaccionar a los clics.
+     */
+    private refresh() {
+        this.ngZone.run(() => this.cdr.detectChanges());
     }
 }

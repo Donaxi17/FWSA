@@ -4,7 +4,7 @@ import {
     addDoc, updateDoc, deleteDoc, query, orderBy, where,
     CollectionReference
 } from '@angular/fire/firestore';
-import { Observable, of, timer } from 'rxjs';
+import { Observable, of, timer, MonoTypeOperatorFunction } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 
 export const TRANSPARENCY_CATEGORIES = [
@@ -89,7 +89,8 @@ export class TransparencyService {
     getDocuments(): Observable<TransparencyDocument[]> {
         const q = query(this.docsCollection, orderBy('createdAt', 'desc'));
         return (collectionData(q, { idField: 'id' }) as Observable<TransparencyDocument[]>).pipe(
-            retry({ count: 3, delay: (_err, attempt) => timer(attempt * 2000) })
+            retry({ count: 3, delay: (_err, attempt) => timer(attempt * 2000) }),
+            runInZone(this.ngZone)
         );
     }
 
@@ -102,7 +103,8 @@ export class TransparencyService {
             catchError(err => {
                 console.warn('Firestore Transparency Error:', err.message);
                 return of([]);
-            })
+            }),
+            runInZone(this.ngZone)
         );
     }
 
@@ -244,6 +246,19 @@ export class TransparencyService {
 }
 
 // ---------------------------------------------------------------------- utilidades
+
+/**
+ * Firebase emite sus datos fuera de la zona de Angular. Si la lista se dibuja ahí,
+ * los botones quedan "desconectados": al hacer clic cambia el estado pero la pantalla
+ * no se actualiza (era el fallo de Editar/Eliminar). Esto devuelve cada emisión a la zona.
+ */
+export function runInZone<T>(zone: NgZone): MonoTypeOperatorFunction<T> {
+    return source => new Observable<T>(subscriber => source.subscribe({
+        next: value => zone.run(() => subscriber.next(value)),
+        error: err => zone.run(() => subscriber.error(err)),
+        complete: () => zone.run(() => subscriber.complete())
+    }));
+}
 
 /** Enlace para ver un documento: el visor interno para archivos subidos, o el enlace externo. */
 export function documentHref(d: TransparencyDocument): string {

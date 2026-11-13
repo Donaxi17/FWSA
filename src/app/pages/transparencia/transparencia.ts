@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -24,6 +24,7 @@ export class TransparenciaComponent implements OnInit, OnDestroy {
     private readonly service = inject(TransparencyService);
     private readonly seo = inject(SeoService);
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly ngZone = inject(NgZone);
     private sub?: Subscription;
 
     readonly formatFileSize = formatFileSize;
@@ -48,7 +49,7 @@ export class TransparenciaComponent implements OnInit, OnDestroy {
         this.sub = this.service.getPublishedDocuments().subscribe(docs => {
             this.documents = docs;
             this.loaded = true;
-            this.cdr.detectChanges();
+            this.refresh();
         });
     }
 
@@ -114,5 +115,13 @@ export class TransparenciaComponent implements OnInit, OnDestroy {
 
     private normalize(s: string): string {
         return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    }
+
+    /**
+     * Redibuja dentro de la zona de Angular. Si se redibuja fuera (p. ej. tras una
+     * respuesta de Firebase), los botones creados quedan sin reaccionar a los clics.
+     */
+    private refresh() {
+        this.ngZone.run(() => this.cdr.detectChanges());
     }
 }

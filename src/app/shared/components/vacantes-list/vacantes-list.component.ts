@@ -1,7 +1,8 @@
-import { Component, inject, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, inject, ChangeDetectorRef, OnInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { VacanciesService, Vacancy } from '../../../services/vacancies.service';
+import { runInZone } from '../../../services/transparency.service';
 
 @Component({
     selector: 'app-vacantes-list',
@@ -125,17 +126,26 @@ export class VacantesListComponent implements OnInit {
     private vacanciesService = inject(VacanciesService);
     private router = inject(Router);
     private cdr = inject(ChangeDetectorRef);
+    private ngZone = inject(NgZone);
 
     vacantes: Vacancy[] = [];
 
     ngOnInit() {
-        this.vacanciesService.getVacancies().subscribe(data => {
+        this.vacanciesService.getVacancies().pipe(runInZone(this.ngZone)).subscribe(data => {
             this.vacantes = data;
-            this.cdr.detectChanges();
+            this.refresh();
         });
     }
 
     apply(id: string) {
         this.router.navigate(['/unete/postular', id]);
+    }
+
+    /**
+     * Redibuja dentro de la zona de Angular. Si se redibuja fuera (p. ej. tras una
+     * respuesta de Firebase), los botones creados quedan sin reaccionar a los clics.
+     */
+    private refresh() {
+        this.ngZone.run(() => this.cdr.detectChanges());
     }
 }
