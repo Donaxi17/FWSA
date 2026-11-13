@@ -7,14 +7,16 @@ import { ProgramsService, Program } from '../../../../services/programs.service'
 import { VacanciesService, Vacancy } from '../../../../services/vacancies.service';
 import { UsersService, AdminUser } from '../../../../services/users.service';
 import { TeamService, TeamMember } from '../../../../services/team.service';
+import { TransparencyAdminComponent } from '../transparency/transparency-admin';
 
 // El interface User se reemplaza por AdminUser del servicio
+type AdminView = 'programas' | 'equipo' | 'vacantes' | 'usuarios' | 'transparencia';
 
 
 @Component({
     selector: 'app-admin-panel',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, TransparencyAdminComponent],
     templateUrl: './panel.html'
 })
 export class AdminPanelComponent {
@@ -36,7 +38,7 @@ export class AdminPanelComponent {
     users: AdminUser[] = [];
 
     // Estados de UI
-    currentView: 'programas' | 'equipo' | 'vacantes' | 'usuarios' = 'programas';
+    currentView: AdminView = 'programas';
     currentUserRole: 'Admin' | 'Editor' = 'Editor';
     isCreatingProgram = false;
     isCreatingVacancy = false;
@@ -56,6 +58,15 @@ export class AdminPanelComponent {
     newUser = { name: '', email: '', password: '', role: 'Editor' as 'Admin' | 'Editor' };
 
     toast = { show: false, message: '', type: 'success' as 'success' | 'error' };
+
+    readonly mobileTabs: { view: AdminView; label: string; adminOnly: boolean }[] = [
+        { view: 'programas', label: 'Programas', adminOnly: false },
+        { view: 'vacantes', label: 'Vacantes', adminOnly: false },
+        { view: 'equipo', label: 'Equipo', adminOnly: true },
+        { view: 'usuarios', label: 'Usuarios', adminOnly: true },
+        { view: 'transparencia', label: 'Transparencia', adminOnly: false }
+    ];
+    private toastTimer: any;
 
     constructor() {
         // Cargar Programas
@@ -98,10 +109,11 @@ export class AdminPanelComponent {
         this.ngZone.run(() => {
             this.toast = { show: true, message, type };
             this.cdr.detectChanges();
-            setTimeout(() => {
+            clearTimeout(this.toastTimer);
+            this.toastTimer = setTimeout(() => {
                 this.toast.show = false;
                 this.cdr.detectChanges();
-            }, 3000);
+            }, type === 'error' ? 6000 : 3000);
         });
     }
 
@@ -168,7 +180,7 @@ export class AdminPanelComponent {
         }
     }
 
-    switchView(view: 'programas' | 'equipo' | 'vacantes' | 'usuarios') {
+    switchView(view: AdminView) {
         // Bloquear switch manual si es editor
         if (this.currentUserRole === 'Editor' && (view === 'usuarios' || view === 'equipo')) {
             this.showToast('No tienes permisos para acceder a esta sección.', 'error');

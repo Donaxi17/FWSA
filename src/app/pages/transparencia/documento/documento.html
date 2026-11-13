@@ -1,0 +1,87 @@
+<section class="bg-gray-50 min-h-[70vh] py-8 md:py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <a routerLink="/transparencia"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-primary mb-6 min-h-[44px]">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Volver a Transparencia
+        </a>
+
+        <!-- Encabezado del documento -->
+        <div *ngIf="document"
+            class="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 md:p-8 mb-6 flex flex-col md:flex-row md:items-center gap-5">
+            <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-2 mb-2">
+                    <span class="px-2.5 py-0.5 rounded-md bg-orange-50 text-orange-700 text-xs font-semibold">{{
+                        document.category }}</span>
+                    <span class="text-xs font-bold text-gray-700">{{ document.year }}</span>
+                    <span *ngIf="document.fileSize" class="text-xs text-gray-500">· {{ extLabel(document) }} · {{
+                        formatFileSize(document.fileSize) }}</span>
+                </div>
+                <h1 class="text-xl md:text-3xl font-heading font-black text-gray-900 leading-tight break-words">{{
+                    document.title }}</h1>
+                <p *ngIf="document.description" class="text-gray-600 mt-2">{{ document.description }}</p>
+            </div>
+            <a *ngIf="state === 'ready' && objectUrl" [href]="objectUrl" [download]="document.fileName || 'documento'"
+                class="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary hover:bg-orange-600 text-white font-bold shadow-lg shadow-orange-500/30 transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Descargar
+            </a>
+        </div>
+
+        <!-- Cargando -->
+        <div *ngIf="state === 'loading'" class="bg-white rounded-3xl border border-gray-100 p-12 text-center"
+            role="status" aria-live="polite">
+            <span class="inline-block animate-spin h-10 w-10 border-4 border-orange-100 border-t-primary rounded-full mb-4"
+                aria-hidden="true"></span>
+            <p class="font-semibold text-gray-700">Cargando documento…</p>
+            <div *ngIf="progress > 0" class="max-w-xs mx-auto mt-4 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-primary transition-all duration-300" [style.width.%]="progress"></div>
+            </div>
+        </div>
+
+        <!-- Error -->
+        <div *ngIf="state === 'error'" class="bg-white rounded-3xl border border-gray-100 p-10 md:p-14 text-center"
+            role="alert">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center">
+                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                </svg>
+            </div>
+            <p class="font-bold text-gray-900 mb-2">{{ errorMessage }}</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3 mt-6">
+                <button type="button" (click)="reload()"
+                    class="px-5 py-3 rounded-xl bg-gray-900 hover:bg-gray-700 text-white font-semibold">Reintentar</button>
+                <a routerLink="/transparencia"
+                    class="px-5 py-3 rounded-xl text-gray-700 font-semibold hover:bg-gray-100">Ver todos los
+                    documentos</a>
+            </div>
+        </div>
+
+        <!-- Visor -->
+        <ng-container *ngIf="state === 'ready'">
+            <div *ngIf="kind === 'pdf'" class="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+                <iframe [src]="safeUrl" [title]="document?.title" class="w-full h-[75vh] min-h-[480px] hidden md:block"></iframe>
+                <!-- En celulares los PDF incrustados suelen no mostrarse -->
+                <div class="md:hidden p-8 text-center">
+                    <p class="text-gray-700 mb-4">Toca para abrir el PDF en tu celular.</p>
+                    <a [href]="objectUrl" target="_blank" rel="noopener"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gray-900 text-white font-semibold">Abrir
+                        PDF</a>
+                </div>
+            </div>
+            <div *ngIf="kind === 'image'" class="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 md:p-6">
+                <img [src]="safeUrl" [alt]="document?.title" class="max-w-full h-auto mx-auto rounded-xl">
+            </div>
+            <div *ngIf="kind === 'other'" class="bg-white rounded-3xl border border-gray-100 p-10 text-center">
+                <p class="text-gray-700">Este tipo de archivo no se puede ver en el navegador. Usa el botón
+                    <strong>Descargar</strong> para abrirlo en tu equipo.</p>
+            </div>
+        </ng-container>
+    </div>
+</section>

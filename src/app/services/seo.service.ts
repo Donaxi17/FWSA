@@ -13,6 +13,8 @@ export interface SEOData {
     twitterTitle?: string;
     twitterDescription?: string;
     twitterImage?: string;
+    /** Por defecto 'index, follow' */
+    robots?: string;
 }
 
 @Injectable({
@@ -41,7 +43,7 @@ export class SeoService {
         }
 
         // Meta tags de robots
-        this.meta.updateTag({ name: 'robots', content: 'index, follow' });
+        this.meta.updateTag({ name: 'robots', content: data.robots || 'index, follow' });
         this.meta.updateTag({ name: 'author', content: this.siteName });
 
         // Open Graph para Facebook, LinkedIn, etc.

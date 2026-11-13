@@ -75,6 +75,20 @@
                 </svg>
                 <span class="font-bold">Usuarios</span>
             </button>
+
+            <button (click)="switchView('transparencia')" [class.bg-primary]="currentView === 'transparencia'"
+                [class.text-white]="currentView === 'transparencia'" [class.shadow-lg]="currentView === 'transparencia'"
+                [ngClass]="{'shadow-primary/30': currentView === 'transparencia'}"
+                [attr.aria-current]="currentView === 'transparencia' ? 'page' : null"
+                class="w-full flex items-center px-4 py-3.5 text-gray-500 rounded-xl hover:bg-gray-50 hover:text-primary transition-all duration-300 group border border-transparent mb-1">
+                <svg [class.text-white]="currentView === 'transparencia'"
+                    class="w-5 h-5 mr-3 transition-colors group-hover:text-primary" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span class="font-bold">Transparencia</span>
+            </button>
         </nav>
 
         <!-- User Profile / Logout -->
@@ -107,8 +121,8 @@
     </aside>
 
     <!-- Mobile Header -->
-    <div
-        class="md:hidden fixed top-0 w-full bg-white/80 backdrop-blur-md z-30 shadow-sm border-b border-gray-100 px-4 py-3 flex justify-between items-center">
+    <div class="md:hidden fixed top-0 w-full bg-white/90 backdrop-blur-md z-30 shadow-sm border-b border-gray-100">
+    <div class="px-4 py-3 flex justify-between items-center">
         <div class="flex items-center gap-2">
             <div class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -118,32 +132,47 @@
             </div>
             <span class="font-bold text-gray-800">FWSA</span>
         </div>
-        <button (click)="onLogout()"
+        <button (click)="onLogout()" aria-label="Cerrar sesión"
             class="p-2 text-gray-500 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
         </button>
     </div>
+    <!-- Mobile Tabs -->
+    <nav class="flex gap-2 overflow-x-auto px-4 pb-3 -mt-1" aria-label="Secciones del panel">
+        <ng-container *ngFor="let tab of mobileTabs">
+            <button *ngIf="!tab.adminOnly || currentUserRole === 'Admin'" type="button" (click)="switchView(tab.view)"
+                [attr.aria-current]="currentView === tab.view ? 'page' : null"
+                class="shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+                [ngClass]="currentView === tab.view ? 'bg-primary text-white shadow-md shadow-orange-500/30' : 'bg-gray-100 text-gray-600'">
+                {{ tab.label }}
+            </button>
+        </ng-container>
+    </nav>
+    </div>
 
     <!-- Main Content Area -->
-    <main class="flex-1 overflow-x-hidden overflow-y-auto relative pt-16 md:pt-0 bg-gray-50/50">
+    <main class="flex-1 overflow-x-hidden overflow-y-auto relative pt-28 md:pt-0 bg-gray-50/50">
 
         <div class="container mx-auto px-4 md:px-8 py-8 relative z-10 max-w-7xl">
 
             <!-- Dynamic Header per View -->
-            <div *ngIf="!isCreatingProgram && !isCreatingUser"
+            <!-- Transparencia -->
+            <app-transparency-admin *ngIf="currentView === 'transparencia'"
+                (notify)="showToast($event.message, $event.type)"></app-transparency-admin>
+
+            <div *ngIf="currentView !== 'transparencia' && currentView !== 'equipo' && !isCreatingProgram && !isCreatingUser && !isCreatingVacancy"
                 class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                 <div>
                     <h3 class="text-3xl font-heading font-bold text-gray-800">
-                        {{ currentView === 'programas' ? 'Programas' : currentView === 'equipo' ? 'Equipo' : currentView
-                        === 'vacantes' ? 'Vacantes' : 'Usuarios Admin' }}
+                        {{ currentView === 'programas' ? 'Programas' : currentView === 'vacantes' ? 'Vacantes' :
+                        'Usuarios Admin' }}
                     </h3>
                     <p class="text-gray-500 mt-1">
-                        {{ currentView === 'programas' ? 'Gestiona los programas sociales.' : currentView === 'equipo' ?
-                        'Administra el personal.' : currentView === 'vacantes' ? 'Gestiona las ofertas laborales.' :
-                        'Gestiona quién tiene acceso al panel.' }}
+                        {{ currentView === 'programas' ? 'Gestiona los programas sociales.' : currentView === 'vacantes'
+                        ? 'Gestiona las ofertas laborales.' : 'Gestiona quién tiene acceso al panel.' }}
                     </p>
                 </div>
 

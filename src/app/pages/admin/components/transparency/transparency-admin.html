@@ -1,0 +1,404 @@
+<!-- ===================== LISTADO ===================== -->
+<section *ngIf="!isFormOpen" aria-labelledby="transp-title">
+    <!-- Encabezado -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+            <h3 id="transp-title" class="text-3xl font-heading font-bold text-gray-800">Transparencia</h3>
+            <p class="text-gray-500 mt-1">Documentos públicos de la fundación. Lo que publiques aquí aparece en
+                <a href="/transparencia" target="_blank" rel="noopener"
+                    class="text-primary font-semibold hover:underline">/transparencia</a>.
+            </p>
+        </div>
+        <button type="button" (click)="openCreate()"
+            class="bg-primary hover:bg-orange-600 text-white px-6 py-3 rounded-xl shadow-lg shadow-orange-500/30 transition-all flex items-center justify-center text-sm font-semibold hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-200">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Nuevo documento
+        </button>
+    </div>
+
+    <!-- Métricas -->
+    <div class="grid grid-cols-3 gap-3 md:gap-6 mb-8">
+        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100">
+            <p class="text-xs md:text-sm font-medium text-gray-500 mb-1">Total</p>
+            <p class="text-2xl md:text-3xl font-bold text-gray-800">{{ documents.length }}</p>
+        </div>
+        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100">
+            <p class="text-xs md:text-sm font-medium text-gray-500 mb-1">Publicados</p>
+            <p class="text-2xl md:text-3xl font-bold text-green-600">{{ publishedCount }}</p>
+        </div>
+        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100">
+            <p class="text-xs md:text-sm font-medium text-gray-500 mb-1">Ocultos</p>
+            <p class="text-2xl md:text-3xl font-bold text-gray-400">{{ documents.length - publishedCount }}</p>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div *ngIf="documents.length > 0"
+        class="bg-white rounded-2xl border border-gray-100 shadow-sm p-3 md:p-4 mb-6 flex flex-col md:flex-row gap-3">
+        <label class="relative flex-1">
+            <span class="sr-only">Buscar documento</span>
+            <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+            </svg>
+            <input type="search" [(ngModel)]="search" placeholder="Buscar por título o descripción"
+                class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-100 focus:border-orange-500 outline-none transition-all text-sm">
+        </label>
+        <label class="md:w-56">
+            <span class="sr-only">Filtrar por categoría</span>
+            <select [(ngModel)]="filterCategory"
+                class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-100 focus:border-orange-500 outline-none bg-white text-sm">
+                <option value="">Todas las categorías</option>
+                <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+            </select>
+        </label>
+        <label class="md:w-36">
+            <span class="sr-only">Filtrar por año</span>
+            <select [(ngModel)]="filterYear"
+                class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-100 focus:border-orange-500 outline-none bg-white text-sm">
+                <option value="">Todos los años</option>
+                <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
+            </select>
+        </label>
+    </div>
+
+    <!-- Cargando -->
+    <div *ngIf="!loaded" class="space-y-3" aria-busy="true" aria-label="Cargando documentos">
+        <div *ngFor="let i of [1,2,3]" class="h-20 bg-white rounded-2xl border border-gray-100 animate-pulse"></div>
+    </div>
+
+    <!-- Error de carga -->
+    <div *ngIf="loaded && loadError" role="alert"
+        class="bg-red-50 border border-red-100 rounded-2xl p-6 mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
+        <p class="flex-1 text-red-700 font-medium">{{ loadError }}</p>
+        <button type="button" (click)="load()"
+            class="shrink-0 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm">Reintentar</button>
+    </div>
+
+    <!-- Vacío total -->
+    <div *ngIf="loaded && !loadError && documents.length === 0"
+        class="bg-white rounded-3xl border-2 border-dashed border-gray-200 p-10 md:p-16 text-center">
+        <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-orange-50 text-primary flex items-center justify-center">
+            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+        </div>
+        <h4 class="text-lg font-bold text-gray-800 mb-2">Aún no hay documentos</h4>
+        <p class="text-gray-500 mb-6 max-w-md mx-auto">Sube estados financieros, informes de gestión, actas u otros
+            documentos para mostrarlos en la página de Transparencia.</p>
+        <button type="button" (click)="openCreate()"
+            class="bg-primary hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-colors">
+            Subir el primer documento
+        </button>
+    </div>
+
+    <!-- Sin resultados -->
+    <div *ngIf="loaded && documents.length > 0 && filtered.length === 0"
+        class="bg-white rounded-2xl border border-gray-100 p-10 text-center">
+        <p class="font-semibold text-gray-700 mb-1">Ningún documento coincide con los filtros.</p>
+        <p class="text-sm text-gray-500 mb-4">Prueba con otra palabra, categoría o año.</p>
+        <button type="button" (click)="clearFilters()" class="text-primary font-semibold text-sm hover:underline">
+            Limpiar filtros
+        </button>
+    </div>
+
+    <!-- Lista -->
+    <ul *ngIf="filtered.length > 0" class="space-y-3" role="list">
+        <li *ngFor="let d of filtered; trackBy: trackById"
+            class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-4"
+            [class.opacity-70]="d.published === false">
+            <!-- Icono tipo -->
+            <div class="flex items-start gap-4 flex-1 min-w-0">
+                <div class="w-12 h-14 shrink-0 rounded-xl flex flex-col items-center justify-center text-[10px] font-black tracking-wide"
+                    [ngClass]="{
+                        'bg-red-50 text-red-600': extLabel(d) === 'PDF',
+                        'bg-blue-50 text-blue-600': extLabel(d) === 'DOC' || extLabel(d) === 'DOCX',
+                        'bg-green-50 text-green-600': extLabel(d) === 'XLS' || extLabel(d) === 'XLSX',
+                        'bg-amber-50 text-amber-600': extLabel(d) === 'PPT' || extLabel(d) === 'PPTX',
+                        'bg-purple-50 text-purple-600': extLabel(d) === 'JPG' || extLabel(d) === 'PNG',
+                        'bg-gray-100 text-gray-600': extLabel(d) === 'ENLACE'
+                    }">
+                    <svg class="w-5 h-5 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path *ngIf="d.source === 'upload'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        <path *ngIf="d.source === 'link'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                    {{ extLabel(d) }}
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h4 class="font-bold text-gray-900 leading-snug break-words">{{ d.title }}</h4>
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-xs text-gray-500">
+                        <span class="px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 font-semibold">{{ d.category }}</span>
+                        <span class="font-semibold text-gray-700">{{ d.year }}</span>
+                        <span *ngIf="d.fileSize">{{ formatFileSize(d.fileSize) }}</span>
+                        <span *ngIf="d.createdAt">Subido {{ formatDate(d.createdAt) }}</span>
+                    </div>
+                    <p *ngIf="d.description" class="text-sm text-gray-600 mt-2 line-clamp-2">{{ d.description }}</p>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="flex items-center justify-between md:justify-end gap-2 border-t md:border-0 border-gray-50 pt-3 md:pt-0">
+                <button type="button" (click)="togglePublished(d)" role="switch"
+                    [attr.aria-checked]="d.published !== false"
+                    [attr.aria-label]="(d.published !== false ? 'Ocultar ' : 'Publicar ') + d.title"
+                    class="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-colors min-h-[40px]"
+                    [ngClass]="d.published !== false ? 'bg-green-50 text-green-700 hover:bg-green-100' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'">
+                    <span class="relative inline-flex w-8 h-4 rounded-full transition-colors"
+                        [ngClass]="d.published !== false ? 'bg-green-500' : 'bg-gray-300'">
+                        <span class="absolute top-0.5 w-3 h-3 bg-white rounded-full shadow transition-all"
+                            [ngClass]="d.published !== false ? 'left-[18px]' : 'left-0.5'"></span>
+                    </span>
+                    {{ d.published !== false ? 'Publicado' : 'Oculto' }}
+                </button>
+                <div class="flex items-center gap-1">
+                    <a [href]="href(d)" target="_blank" rel="noopener" [attr.aria-label]="'Ver ' + d.title"
+                        title="Ver documento"
+                        class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                    <button type="button" (click)="openEdit(d)" [attr.aria-label]="'Editar ' + d.title"
+                        title="Editar"
+                        class="w-10 h-10 flex items-center justify-center text-blue-500 hover:bg-blue-50 rounded-xl transition-colors">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                    </button>
+                    <button type="button" (click)="askDelete(d)" [attr.aria-label]="'Eliminar ' + d.title"
+                        title="Eliminar"
+                        class="w-10 h-10 flex items-center justify-center text-red-500 hover:bg-red-50 rounded-xl transition-colors">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+
+<!-- ===================== FORMULARIO ===================== -->
+<section *ngIf="isFormOpen" class="max-w-3xl mx-auto" aria-labelledby="transp-form-title">
+    <form (ngSubmit)="save()" novalidate
+        class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="p-6 md:p-8 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+            <div>
+                <h2 id="transp-form-title" class="text-2xl font-bold text-gray-900">
+                    {{ editingId ? 'Editar documento' : 'Nuevo documento' }}</h2>
+                <p class="text-sm text-gray-500 mt-1">Los campos con * son obligatorios.</p>
+            </div>
+            <button type="button" (click)="closeForm()" [disabled]="isSaving" aria-label="Cerrar formulario"
+                class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="p-6 md:p-8 space-y-6">
+            <!-- Título -->
+            <div>
+                <label for="td-title" class="block text-sm font-semibold text-gray-700 mb-2">Título *</label>
+                <input id="td-title" name="title" type="text" [(ngModel)]="form.title" maxlength="140"
+                    placeholder="Ej: Estados financieros 2025"
+                    [attr.aria-invalid]="titleInvalid" aria-describedby="td-title-err"
+                    class="w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none transition-all"
+                    [ngClass]="titleInvalid ? 'border-red-400 focus:ring-red-100' : 'border-gray-200 focus:ring-orange-100 focus:border-orange-500'">
+                <p *ngIf="titleInvalid" id="td-title-err" class="text-sm text-red-600 mt-1.5">Escribe un título.</p>
+            </div>
+
+            <!-- Categoría + Año -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="sm:col-span-2">
+                    <label for="td-cat" class="block text-sm font-semibold text-gray-700 mb-2">Categoría *</label>
+                    <select id="td-cat" name="category" [(ngModel)]="form.category"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-100 focus:border-orange-500 outline-none bg-white">
+                        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="td-year" class="block text-sm font-semibold text-gray-700 mb-2">Año *</label>
+                    <input id="td-year" name="year" type="number" inputmode="numeric" [(ngModel)]="form.year"
+                        min="1990" [max]="currentYear + 1"
+                        [attr.aria-invalid]="yearInvalid" aria-describedby="td-year-err"
+                        class="w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none transition-all"
+                        [ngClass]="yearInvalid ? 'border-red-400 focus:ring-red-100' : 'border-gray-200 focus:ring-orange-100 focus:border-orange-500'">
+                    <p *ngIf="yearInvalid" id="td-year-err" class="text-sm text-red-600 mt-1.5">Año entre 1990 y
+                        {{ currentYear + 1 }}.</p>
+                </div>
+            </div>
+
+            <!-- Descripción -->
+            <div>
+                <label for="td-desc" class="block text-sm font-semibold text-gray-700 mb-2">Descripción
+                    <span class="font-normal text-gray-400">(opcional)</span></label>
+                <textarea id="td-desc" name="description" [(ngModel)]="form.description" rows="3" maxlength="500"
+                    placeholder="Breve explicación de qué contiene el documento"
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-100 focus:border-orange-500 outline-none transition-all"></textarea>
+            </div>
+
+            <!-- Origen del archivo -->
+            <fieldset>
+                <legend class="block text-sm font-semibold text-gray-700 mb-2">Archivo *</legend>
+                <div class="inline-flex p-1 bg-gray-100 rounded-xl mb-4" role="radiogroup" aria-label="Origen del archivo">
+                    <button type="button" role="radio" [attr.aria-checked]="form.source === 'upload'"
+                        (click)="setSource('upload')" [disabled]="isSaving"
+                        class="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                        [ngClass]="form.source === 'upload' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'">
+                        Subir archivo
+                    </button>
+                    <button type="button" role="radio" [attr.aria-checked]="form.source === 'link'"
+                        (click)="setSource('link')" [disabled]="isSaving"
+                        class="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+                        [ngClass]="form.source === 'link' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'">
+                        Enlace externo
+                    </button>
+                </div>
+
+                <!-- Subir -->
+                <div *ngIf="form.source === 'upload'">
+                    <!-- Archivo actual (al editar) -->
+                    <div *ngIf="hasExistingUpload && !selectedFile"
+                        class="flex items-center gap-3 p-4 mb-3 rounded-xl bg-gray-50 border border-gray-100">
+                        <svg class="w-6 h-6 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-sm font-semibold text-gray-800 truncate">{{ form.fileName || 'Archivo actual' }}</p>
+                            <p class="text-xs text-gray-500">{{ formatFileSize(form.fileSize) }} · Sube otro para reemplazarlo</p>
+                        </div>
+                        <a *ngIf="editingId" [href]="'/transparencia/documento/' + editingId" target="_blank" rel="noopener"
+                            class="text-sm font-semibold text-primary hover:underline shrink-0">Ver</a>
+                    </div>
+
+                    <!-- Archivo seleccionado -->
+                    <div *ngIf="selectedFile"
+                        class="flex items-center gap-3 p-4 rounded-xl bg-orange-50 border border-orange-100">
+                        <svg class="w-6 h-6 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-sm font-semibold text-gray-800 truncate">{{ selectedFile.name }}</p>
+                            <p class="text-xs text-gray-500">{{ formatFileSize(selectedFile.size) }}</p>
+                        </div>
+                        <button *ngIf="!isSaving" type="button" (click)="removeSelectedFile()"
+                            aria-label="Quitar archivo seleccionado"
+                            class="w-9 h-9 flex items-center justify-center text-gray-500 hover:text-red-600 hover:bg-white rounded-lg">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Zona de arrastre -->
+                    <div *ngIf="!selectedFile">
+                        <input id="td-file" type="file" class="sr-only" [accept]="accept" (change)="onFileInput($event)" #fileInput>
+                        <label for="td-file" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                            (drop)="onDrop($event)" tabindex="0" (keydown.enter)="fileInput.click()"
+                            (keydown.space)="$event.preventDefault(); fileInput.click()"
+                            class="flex flex-col items-center justify-center text-center gap-2 px-6 py-10 rounded-2xl border-2 border-dashed cursor-pointer transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-100"
+                            [ngClass]="isDragging ? 'border-orange-500 bg-orange-50' : (fileMissing || fileError ? 'border-red-300 bg-red-50/40' : 'border-gray-200 hover:border-orange-400 hover:bg-orange-50/40')">
+                            <svg class="w-10 h-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <span class="text-sm text-gray-700"><span class="font-semibold text-primary">Elige un archivo</span>
+                                o arrástralo aquí</span>
+                            <span class="text-xs text-gray-500">PDF, Word, Excel, PowerPoint o imagen · máx. {{ maxMb }} MB</span>
+                        </label>
+                    </div>
+                    <p *ngIf="fileError" class="text-sm text-red-600 mt-2" role="alert">{{ fileError }}</p>
+                    <p *ngIf="fileMissing && !fileError" class="text-sm text-red-600 mt-2">Selecciona un archivo.</p>
+
+                    <!-- Progreso -->
+                    <div *ngIf="isSaving && selectedFile" class="mt-4" aria-live="polite">
+                        <div class="flex justify-between text-xs font-semibold text-gray-600 mb-1.5">
+                            <span>Guardando archivo…</span><span>{{ uploadProgress }}%</span>
+                        </div>
+                        <div class="h-2 bg-gray-100 rounded-full overflow-hidden" role="progressbar"
+                            [attr.aria-valuenow]="uploadProgress" aria-valuemin="0" aria-valuemax="100">
+                            <div class="h-full bg-primary rounded-full transition-all duration-300"
+                                [style.width.%]="uploadProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enlace -->
+                <div *ngIf="form.source === 'link'">
+                    <label for="td-link" class="sr-only">Enlace del documento</label>
+                    <input id="td-link" name="fileUrl" type="url" [(ngModel)]="form.fileUrl"
+                        placeholder="https://drive.google.com/…"
+                        [attr.aria-invalid]="linkInvalid" aria-describedby="td-link-help"
+                        class="w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none transition-all"
+                        [ngClass]="linkInvalid ? 'border-red-400 focus:ring-red-100' : 'border-gray-200 focus:ring-orange-100 focus:border-orange-500'">
+                    <p id="td-link-help" class="text-xs mt-1.5" [ngClass]="linkInvalid ? 'text-red-600' : 'text-gray-500'">
+                        {{ linkInvalid ? 'Pega un enlace válido que empiece por https://' :
+                        'En Google Drive, comparte el archivo como "Cualquier persona con el enlace" antes de pegarlo.' }}
+                    </p>
+                </div>
+            </fieldset>
+
+            <!-- Publicado -->
+            <label class="flex items-start gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50/60 cursor-pointer">
+                <input type="checkbox" name="published" [(ngModel)]="form.published"
+                    class="mt-0.5 w-5 h-5 rounded border-gray-300 text-orange-500 focus:ring-orange-500 accent-orange-500">
+                <span>
+                    <span class="block text-sm font-semibold text-gray-800">Publicar en la página</span>
+                    <span class="block text-xs text-gray-500">Si lo desmarcas, el documento queda guardado pero no se
+                        muestra al público.</span>
+                </span>
+            </label>
+        </div>
+
+        <div class="p-6 md:p-8 border-t border-gray-100 bg-gray-50 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-3">
+            <button type="button" (click)="closeForm()" [disabled]="isSaving"
+                class="px-6 py-3 text-gray-700 font-medium rounded-xl hover:bg-gray-100 disabled:opacity-50">Cancelar</button>
+            <button type="submit" [disabled]="isSaving"
+                class="px-8 py-3 rounded-xl bg-orange-500 text-white font-bold hover:bg-orange-600 shadow-lg shadow-orange-500/30 transition-all flex items-center justify-center disabled:opacity-70 disabled:cursor-wait">
+                <span *ngIf="isSaving" class="animate-spin h-4 w-4 mr-2 border-2 border-white/30 border-t-white rounded-full" aria-hidden="true"></span>
+                {{ isSaving ? 'Guardando…' : (editingId ? 'Guardar cambios' : 'Crear documento') }}
+            </button>
+        </div>
+    </form>
+</section>
+
+<!-- ===================== CONFIRMAR BORRADO ===================== -->
+<div *ngIf="pendingDelete" class="fixed inset-0 z-[90] flex items-center justify-center p-4" role="dialog"
+    aria-modal="true" aria-labelledby="del-title" aria-describedby="del-desc">
+    <div class="absolute inset-0 bg-gray-900/50 backdrop-blur-sm" (click)="!isDeleting && (pendingDelete = null)"></div>
+    <div class="relative bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 md:p-8">
+        <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            </svg>
+        </div>
+        <h3 id="del-title" class="text-xl font-bold text-gray-900 mb-2">¿Eliminar este documento?</h3>
+        <p id="del-desc" class="text-gray-600 text-sm mb-6">
+            Se borrará <strong class="text-gray-900">"{{ pendingDelete.title }}"</strong> de la página
+            <span *ngIf="pendingDelete.source === 'upload'"> y también el archivo guardado</span>. Esta acción no se
+            puede deshacer.
+        </p>
+        <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+            <button type="button" (click)="pendingDelete = null" [disabled]="isDeleting"
+                class="px-5 py-3 rounded-xl text-gray-700 font-semibold hover:bg-gray-100 disabled:opacity-50">Cancelar</button>
+            <button type="button" (click)="confirmDelete()" [disabled]="isDeleting"
+                class="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center justify-center disabled:opacity-70">
+                <span *ngIf="isDeleting" class="animate-spin h-4 w-4 mr-2 border-2 border-white/30 border-t-white rounded-full" aria-hidden="true"></span>
+                {{ isDeleting ? 'Eliminando…' : 'Sí, eliminar' }}
+            </button>
+        </div>
+    </div>
+</div>
